@@ -5,13 +5,11 @@ install:
   - npm install # npm ci
 script:
   - npm run build # npm run docs:build
-addons:
-  ssh_known_hosts: 140.82.113.4
 after_script:
   - cd docs/.vuepress/dist
   - git add -A
   - git commit -m 'deploy'
-  - git push -f git@github.com:xiaoSais/xiaoSais.github.io.git master
+  - git push --force --quiet "https://${GITHUB_TOKEN}@${GH_REF}" master
 deploy:
   provider: pages
   skip_cleanup: true
