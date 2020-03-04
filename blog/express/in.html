@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>三、内置中间件 | Secret</title>
+    <meta name="description" content="Just playing around">
+    <meta name="generator" content="VuePress 1.3.1">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.aee194d5.css" as="style"><link rel="preload" href="/assets/js/app.12380ca6.js" as="script"><link rel="preload" href="/assets/js/2.cfd58636.js" as="script"><link rel="preload" href="/assets/js/6.bdef66e2.js" as="script"><link rel="prefetch" href="/assets/js/10.c30585d1.js"><link rel="prefetch" href="/assets/js/11.2fb492b5.js"><link rel="prefetch" href="/assets/js/12.4ce3828a.js"><link rel="prefetch" href="/assets/js/13.b7ba9b2d.js"><link rel="prefetch" href="/assets/js/14.0bf1f2b9.js"><link rel="prefetch" href="/assets/js/15.0f64fc68.js"><link rel="prefetch" href="/assets/js/16.ed96dff6.js"><link rel="prefetch" href="/assets/js/17.ec348c71.js"><link rel="prefetch" href="/assets/js/18.db1b9aa0.js"><link rel="prefetch" href="/assets/js/19.2119ca99.js"><link rel="prefetch" href="/assets/js/20.421983e6.js"><link rel="prefetch" href="/assets/js/21.89882d03.js"><link rel="prefetch" href="/assets/js/22.4354cee5.js"><link rel="prefetch" href="/assets/js/23.e98422f5.js"><link rel="prefetch" href="/assets/js/24.64903d0f.js"><link rel="prefetch" href="/assets/js/25.6b0f62f2.js"><link rel="prefetch" href="/assets/js/26.3167e0b9.js"><link rel="prefetch" href="/assets/js/27.87fca6b4.js"><link rel="prefetch" href="/assets/js/28.9679f207.js"><link rel="prefetch" href="/assets/js/29.6922ef3d.js"><link rel="prefetch" href="/assets/js/3.b0c069e6.js"><link rel="prefetch" href="/assets/js/30.d939c463.js"><link rel="prefetch" href="/assets/js/31.f7dfaa09.js"><link rel="prefetch" href="/assets/js/32.1adb14ce.js"><link rel="prefetch" href="/assets/js/33.80fd4dc1.js"><link rel="prefetch" href="/assets/js/34.5489d530.js"><link rel="prefetch" href="/assets/js/35.0f6b6028.js"><link rel="prefetch" href="/assets/js/36.95f54780.js"><link rel="prefetch" href="/assets/js/37.f8cb9cb2.js"><link rel="prefetch" href="/assets/js/38.2bb255cd.js"><link rel="prefetch" href="/assets/js/39.54a4d20e.js"><link rel="prefetch" href="/assets/js/4.eaa24ed2.js"><link rel="prefetch" href="/assets/js/40.fc2cbac6.js"><link rel="prefetch" href="/assets/js/41.3c407481.js"><link rel="prefetch" href="/assets/js/5.a62e1c37.js"><link rel="prefetch" href="/assets/js/7.17c555f8.js"><link rel="prefetch" href="/assets/js/8.ffccb86b.js"><link rel="prefetch" href="/assets/js/9.7ffd6f2e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.aee194d5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Secret</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/document/swiper.html" class="nav-link">
+  技术文档
+</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/document/swiper.html" class="nav-link">
+  技术文档
+</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>技术文档</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>深入axios</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Express</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/express/ex.html" class="sidebar-link">一、构造函数</a></li><li><a href="/blog/express/middle.html" class="sidebar-link">二、Express中间件</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/express/middle.html#中间件是什么" class="sidebar-link">中间件是什么</a></li><li class="sidebar-sub-header"><a href="/blog/express/middle.html#中间件类型" class="sidebar-link">中间件类型</a></li><li class="sidebar-sub-header"><a href="/blog/express/middle.html#中间件原理" class="sidebar-link">中间件原理</a></li></ul></li><li><a href="/blog/express/in.html" class="active sidebar-link">三、内置中间件</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/express/in.html#express-json" class="sidebar-link">express.json()</a></li><li class="sidebar-sub-header"><a href="/blog/express/in.html#express-static" class="sidebar-link">express.static()</a></li><li class="sidebar-sub-header"><a href="/blog/express/in.html#express-router" class="sidebar-link">express.Router()</a></li><li class="sidebar-sub-header"><a href="/blog/express/in.html#express-urlencoded" class="sidebar-link">express.urlencoded()</a></li></ul></li><li><a href="/blog/express/design.html" class="sidebar-link">四、设计模式</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/express/design.html#继承" class="sidebar-link">继承</a></li><li class="sidebar-sub-header"><a href="/blog/express/design.html#行为委托" class="sidebar-link">行为委托</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Node.js</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>算法</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>跨域</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>学习轨迹</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>散文随笔</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="三、内置中间件"><a href="#三、内置中间件" class="header-anchor">#</a> 三、内置中间件</h1> <h2 id="express-json"><a href="#express-json" class="header-anchor">#</a> express.json()</h2> <p>express.json() 是Express内部的json解析中间件，它的作用是获取post请求的Json数据，并在req.body()中拿到，用法如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  app.use(express.json({
+    limit: '120kb',
+    inflate: false
+  }))
+
+  app.post('/login', (req, res) =&gt; {
+    res.send(console.log(req.body))
+  })
+  // 如果没有用该中间件的话，req.body 为undefined
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>首先中间件是一个函数，可以传入三个参数，基本结构如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function (res,res, next) {
+    // 处理req | res
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>猜想express.json() 应该返回的也是这么一个类似的函数。</p> <h4 id="body-parser-源码分析"><a href="#body-parser-源码分析" class="header-anchor">#</a> body-parser 源码分析</h4> <p>github仓库地址在 https://github.com/expressjs/body-parser</p> <p>入口文件在 lib/index.js下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  Object.defineProperty(exports, 'json', {
+    configurable: true,
+    enumerable: true,
+    get: createParserGetter('json')
+  })
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>看到这里就知道为何可以使用express.json()了，这里访问express.json()其实是调用了createParserGetter('json')方法。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function createParserGetter (name) {
+    return function get () {
+      return loadParser(name)
+    }
+  }
+
+  function loadParser (parserName) {
+    var parser = parsers[parserName]
+
+    if (parser !== undefined) {
+      return parser
+    }
+
+    // 引用不同的文件
+    switch (parserName) {
+      case 'json':
+        parser = require('./lib/types/json')
+        break
+      case 'raw':
+        parser = require('./lib/types/raw')
+        break
+      case 'text':
+        parser = require('./lib/types/text')
+        break
+      case 'urlencoded':
+        parser = require('./lib/types/urlencoded')
+        break
+    }
+
+    // 缓存require避免重复引入
+    return (parsers[parserName] = parser)
+  }
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br></div></div><p>createParserGetter最后引入了不同的文件，express.json()的核心指向了./lib/types/json文件，代码如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function json (options) {
+    // 传入的选项进行初始化
+    var opts = options || {}
+
+    var limit = typeof opts.limit !== 'number'
+      ? bytes.parse(opts.limit || '100kb')
+      : opts.limit
+    var inflate = opts.inflate !== false
+    var reviver = opts.reviver
+    var strict = opts.strict !== false
+    var type = opts.type || 'application/json'
+    var verify = opts.verify || false
+
+    // verify 选项必须是函数
+    if (verify !== false &amp;&amp; typeof verify !== 'function') {
+      throw new TypeError('option verify must be function')
+    }
+
+    // type 可以是MIME类型，直接丢给 typeis 处理
+    var shouldParse = typeof type !== 'function'
+    ? typeChecker(type)
+    : type
+    ...
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><p>以上这段代码主要数对传入的options进行初始化。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function json (options) {
+    var opts = options || {}
+    ...
+    function parse (body) {
+      if (body.length === 0) {
+        // special-case empty json body, as it's a common client-side mistake
+        // TODO: maybe make this configurable or part of &quot;strict&quot; option
+        return {}
+      }
+
+      if (strict) {
+        var first = firstchar(body)
+
+        if (first !== '{' &amp;&amp; first !== '[') {
+          debug('strict violation')
+          throw createStrictSyntaxError(body, first)
+        }
+      }
+
+      try {
+        debug('parse json')
+        return JSON.parse(body, reviver)
+      } catch (e) {
+        throw normalizeJsonSyntaxError(e, {
+          message: e.message,
+          stack: e.stack
+        })
+      }
+    }
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><p>parse方法 主要用来转化JSON的，JSON字符串转化为JSON对象，可以学习下错误处理方式。特别要注意 reviver 是从options传进来的。是 JSON.parse() 方法的第二个参数。它会被传入到接下来的read()方法里。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function json (options) {
+    // 传入的选项进行初始化
+    var opts = options || {}
+
+    return function jsonParser (req, res, next) {
+      // 从缓存取，取到跳过
+      if (req._body) {
+        debug('body already parsed')
+        next()
+        return
+      }
+      // 创建 req.body 属性
+      req.body = req.body || {}
+
+      // 跳过空的请求对象
+      if (!typeis.hasBody(req)) {
+        debug('skip empty body')
+        next()
+        return
+      }
+
+      debug('content-type %j', req.headers['content-type'])
+
+      // 调用 typeis 判断是否需要转化
+      if (!shouldParse(req)) {
+        debug('skip parsing')
+        next()
+        return
+      }
+
+      // 获取charset，如果不是 utf- 开头抛错
+      var charset = getCharset(req) || ' -8'
+      if (charset.substr(0, 4) !== 'utf-') {
+        debug('invalid charset')
+        next(createError(415, 'unsupported charset &quot;' + charset.toUpperCase() + '&quot;', {
+          charset: charset,
+          type: 'charset.unsupported'
+        }))
+        return
+      }
+
+      /**
+      * options 传入到 read() 函数里
+      */
+      read(req, res, next, parse, debug, {
+        encoding: charset,
+        inflate: inflate,
+        limit: limit,
+        verify: verify
+      })
+    }
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br></div></div><p>不出所料，确认返回了这么一个中间件函数。这段代码先是从req._body取值，取到的话就执行下一个中间件，可以猜想转化完成之后会把数据挂载到req._body缓存起来。然后进行了一些边界处理，如跳过空的请求对象，将请求类型交给 typeis 看返回值是否需要处理JSON，判断charset是否已utf-开头，在判断charset的时候调用了外部的 content-type 库。这段代码的核心在 read 方法，我们看下read里面做了什么。</p> <p>./lib/read.js</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function read (req, res, next, parse, debug, options) {
+    var length
+    var opts = options
+    var stream
+
+    // 是否转化过的标志
+    req._body = true
+
+    // 初始化传入的option
+    var encoding = opts.encoding !== null
+      ? opts.encoding
+      : null
+    var verify = opts.verify
+
+    try {
+      stream = contentstream(req, debug, opts.inflate)
+      length = stream.length
+      // 这句是干啥的 为何要置为 undefined 
+      stream.length = undefined
+    } catch (err) {
+      return next(err)
+    ...
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p>以上代码主要做了两件事情，1、初始化参数，我们看到 req._body 在这里置为了true，和我们原先的猜想一致，类似于一种锁的机制。2、通过 contentstream 方法将req对象转化为内容流。我们看一下 contentstream 的代码。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function contentstream (req, debug, inflate) {
+    var encoding = (req.headers['content-encoding'] || 'identity').toLowerCase()
+    var length = req.headers['content-length']
+    var stream
+
+    debug('content-encoding &quot;%s&quot;', encoding)
+
+    // 根据请求头中的编码格式决定采用哪种方式进行编码
+    if (inflate === false &amp;&amp; encoding !== 'identity') {
+      throw createError(415, 'content encoding unsupported', {
+        encoding: encoding,
+        type: 'encoding.unsupported'
+      })
+    }
+
+    // 调用不同的库对req进行压缩，目前只支持两种压缩格式 deflate 和 gzip 最后拿到 stream
+    switch (encoding) {
+      case 'deflate':
+        stream = zlib.createInflate()
+        debug('inflate body')
+        // req转化成流数据，追加到 stream 上
+        req.pipe(stream)
+        break
+      case 'gzip':
+        stream = zlib.createGunzip()
+        debug('gunzip body')
+        req.pipe(stream)
+        break
+      case 'identity':
+        stream = req
+        stream.length = length
+        break
+      default:
+        throw createError(415, 'unsupported content encoding &quot;' + encoding + '&quot;', {
+          encoding: encoding,
+          type: 'encoding.unsupported'
+        })
+    }
+
+    return stream
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br></div></div><p>contentstream 方法会根据 req.headers['content-encoding'] 的值采用不同的方式对req的内容进行编码。如果 identity 的话代表默认，不进行任何编码。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  // 调用getBody，拿到body的内容，关键还是在 getBody -&gt; 源于另一个开源库 raw-body
+  getBody(stream, opts, function (error, body) {
+    console.log(body)
+    if (error) {
+      var _error
+
+      if (error.type === 'encoding.unsupported') {
+        // echo back charset
+        _error = createError(415, 'unsupported charset &quot;' + encoding.toUpperCase() + '&quot;', {
+          charset: encoding.toLowerCase(),
+          type: 'charset.unsupported'
+        })
+      } else {
+        // set status code on error
+        _error = createError(400, error)
+      }
+
+      // read off entire request
+      stream.resume()
+      onFinished(req, function onfinished () {
+        next(createError(400, _error))
+      })
+      return
+    }
+
+    // verify
+    if (verify) {
+      try {
+        debug('verify body')
+        verify(req, res, body, encoding)
+      } catch (err) {
+        next(createError(403, err, {
+          body: body,
+          type: err.type || 'entity.verify.failed'
+        }))
+        return
+      }
+    }
+
+    // parse
+    var str = body
+    try {
+      debug('parse body')
+      str = typeof body !== 'string' &amp;&amp; encoding !== null
+        ? iconv.decode(body, encoding)
+        : body
+      req.body = parse(str)
+    } catch (err) {
+      next(createError(400, err, {
+        body: str,
+        type: err.type || 'entity.parse.failed'
+      }))
+      return
+    }
+
+    next()
+  })
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br></div></div><p>该中间件最终调用了第三方库 raw-body 进行了拿到请求body，最后通过JSON.parse()拿到请求对象。</p> <h4 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h4> <p><img src="/assets/img/a.4de698cf.jpg" alt="solar"></p> <h2 id="express-static"><a href="#express-static" class="header-anchor">#</a> express.static()</h2> <h2 id="express-router"><a href="#express-router" class="header-anchor">#</a> express.Router()</h2> <h2 id="express-urlencoded"><a href="#express-urlencoded" class="header-anchor">#</a> express.urlencoded()</h2></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/express/middle.html" class="prev">
+        二、Express中间件
+      </a></span> <span class="next"><a href="/blog/express/design.html">
+        四、设计模式
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.12380ca6.js" defer></script><script src="/assets/js/2.cfd58636.js" defer></script><script src="/assets/js/6.bdef66e2.js" defer></script>
+  </body>
+</html>

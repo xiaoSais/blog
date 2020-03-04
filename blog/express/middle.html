@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>二、Express中间件 | Secret</title>
+    <meta name="description" content="Just playing around">
+    <meta name="generator" content="VuePress 1.3.1">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.aee194d5.css" as="style"><link rel="preload" href="/assets/js/app.12380ca6.js" as="script"><link rel="preload" href="/assets/js/2.cfd58636.js" as="script"><link rel="preload" href="/assets/js/5.a62e1c37.js" as="script"><link rel="prefetch" href="/assets/js/10.c30585d1.js"><link rel="prefetch" href="/assets/js/11.2fb492b5.js"><link rel="prefetch" href="/assets/js/12.4ce3828a.js"><link rel="prefetch" href="/assets/js/13.b7ba9b2d.js"><link rel="prefetch" href="/assets/js/14.0bf1f2b9.js"><link rel="prefetch" href="/assets/js/15.0f64fc68.js"><link rel="prefetch" href="/assets/js/16.ed96dff6.js"><link rel="prefetch" href="/assets/js/17.ec348c71.js"><link rel="prefetch" href="/assets/js/18.db1b9aa0.js"><link rel="prefetch" href="/assets/js/19.2119ca99.js"><link rel="prefetch" href="/assets/js/20.421983e6.js"><link rel="prefetch" href="/assets/js/21.89882d03.js"><link rel="prefetch" href="/assets/js/22.4354cee5.js"><link rel="prefetch" href="/assets/js/23.e98422f5.js"><link rel="prefetch" href="/assets/js/24.64903d0f.js"><link rel="prefetch" href="/assets/js/25.6b0f62f2.js"><link rel="prefetch" href="/assets/js/26.3167e0b9.js"><link rel="prefetch" href="/assets/js/27.87fca6b4.js"><link rel="prefetch" href="/assets/js/28.9679f207.js"><link rel="prefetch" href="/assets/js/29.6922ef3d.js"><link rel="prefetch" href="/assets/js/3.b0c069e6.js"><link rel="prefetch" href="/assets/js/30.d939c463.js"><link rel="prefetch" href="/assets/js/31.f7dfaa09.js"><link rel="prefetch" href="/assets/js/32.1adb14ce.js"><link rel="prefetch" href="/assets/js/33.80fd4dc1.js"><link rel="prefetch" href="/assets/js/34.5489d530.js"><link rel="prefetch" href="/assets/js/35.0f6b6028.js"><link rel="prefetch" href="/assets/js/36.95f54780.js"><link rel="prefetch" href="/assets/js/37.f8cb9cb2.js"><link rel="prefetch" href="/assets/js/38.2bb255cd.js"><link rel="prefetch" href="/assets/js/39.54a4d20e.js"><link rel="prefetch" href="/assets/js/4.eaa24ed2.js"><link rel="prefetch" href="/assets/js/40.fc2cbac6.js"><link rel="prefetch" href="/assets/js/41.3c407481.js"><link rel="prefetch" href="/assets/js/6.bdef66e2.js"><link rel="prefetch" href="/assets/js/7.17c555f8.js"><link rel="prefetch" href="/assets/js/8.ffccb86b.js"><link rel="prefetch" href="/assets/js/9.7ffd6f2e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.aee194d5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Secret</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/document/swiper.html" class="nav-link">
+  技术文档
+</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/document/swiper.html" class="nav-link">
+  技术文档
+</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>技术文档</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>深入axios</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Express</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/express/ex.html" class="sidebar-link">一、构造函数</a></li><li><a href="/blog/express/middle.html" class="active sidebar-link">二、Express中间件</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/express/middle.html#中间件是什么" class="sidebar-link">中间件是什么</a></li><li class="sidebar-sub-header"><a href="/blog/express/middle.html#中间件类型" class="sidebar-link">中间件类型</a></li><li class="sidebar-sub-header"><a href="/blog/express/middle.html#中间件原理" class="sidebar-link">中间件原理</a></li></ul></li><li><a href="/blog/express/in.html" class="sidebar-link">三、内置中间件</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/express/in.html#express-json" class="sidebar-link">express.json()</a></li><li class="sidebar-sub-header"><a href="/blog/express/in.html#express-static" class="sidebar-link">express.static()</a></li><li class="sidebar-sub-header"><a href="/blog/express/in.html#express-router" class="sidebar-link">express.Router()</a></li><li class="sidebar-sub-header"><a href="/blog/express/in.html#express-urlencoded" class="sidebar-link">express.urlencoded()</a></li></ul></li><li><a href="/blog/express/design.html" class="sidebar-link">四、设计模式</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/express/design.html#继承" class="sidebar-link">继承</a></li><li class="sidebar-sub-header"><a href="/blog/express/design.html#行为委托" class="sidebar-link">行为委托</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Node.js</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>算法</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>跨域</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>学习轨迹</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>散文随笔</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="二、express中间件"><a href="#二、express中间件" class="header-anchor">#</a> 二、Express中间件</h1> <h2 id="中间件是什么"><a href="#中间件是什么" class="header-anchor">#</a> 中间件是什么</h2> <p>中间件是在Express请求和相应周期中可以访问请求和相应对象以及下一个中间件的函数。调用next()函数将在该中间件之后下一个执行中间件。</p> <p>中间件可以执行以下的功能：</p> <ul><li>执行任何代码</li> <li>更改请求和相应对象</li> <li>结束请求-响应周期</li> <li>调用堆栈中的下一个中间件</li></ul> <p>如果当前中间件没有结束请求-相应周期，则必须调用next()将控制权传递给下一个中间件功能，否则，该请求将被挂起。</p> <p>中间件加载的顺序很重要，首先加载的中间件功能也将首先执行。</p> <p>一个简单的例子：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  var express = require('express')
+  var app = express()
+
+  var requestTime = function (req, res, next) {
+    req.requestTime = Date.now()
+    next()
+  }
+
+  app.use(requestTime)
+
+  app.get('/', function (req, res) {
+    var responseText = 'Hello World!&lt;br&gt;'
+    responseText += '&lt;small&gt;Requested at: ' + req.requestTime + '&lt;/small&gt;'
+    res.send(responseText)
+  })
+
+  app.listen(3000)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>在这个例子里 requestTime 就是一个中间件，在这个例子中，该中间件给req挂载了 requestTime 属性
+执行next()方法，把中间件的控制权交给 app.get()</p> <h2 id="中间件类型"><a href="#中间件类型" class="header-anchor">#</a> 中间件类型</h2> <h3 id="应用级中间件"><a href="#应用级中间件" class="header-anchor">#</a> 应用级中间件</h3> <p>通过app.use()函数，挂载到app实例上。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  // 每次发送请求会打印
+  app.use(function (req, res, next) {
+    console.log('Time:', Date.now())
+    next()
+  })
+  // 访问/login路径的时候会打印，不管发送什么请求
+  app.use('/login',function (req, res, next) {
+    console.log('Time:', Date.now())
+    next()
+  })
+  // 发送get请求且路径为 /login的时候会打印
+  app.get('/login',function (req, res, next) {
+    console.log('Time:', Date.now())
+    next()
+  })
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="路由中间件"><a href="#路由中间件" class="header-anchor">#</a> 路由中间件</h3> <p>通过app.method()函数，挂载到app实例上。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  // 发送get请求且路径为 /login的时候会打印
+  app.get('/login',function (req, res, next) {
+    console.log('Time:', Date.now())
+    next()
+  })
+  // 发送post请求的时候执行相应回调
+  app.post('/login', fuunction(req, res, next) {
+    console.log('Time:', Date.now())
+    next()
+  })
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="错误处理中间件"><a href="#错误处理中间件" class="header-anchor">#</a> 错误处理中间件</h3> <p>中间件传递四个参数</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="内置中间件"><a href="#内置中间件" class="header-anchor">#</a> 内置中间件</h3> <p>express.static() | express.json() | express.urlencoded() | express.Router()</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  app.use(express.static('dist'))
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="第三方中间件"><a href="#第三方中间件" class="header-anchor">#</a> 第三方中间件</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>  var express = require('express')
+  var app = express()
+  var cookieParser = require('cookie-parser')
+
+  // load the cookie-parsing middleware
+  app.use(cookieParser())
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h2 id="中间件原理"><a href="#中间件原理" class="header-anchor">#</a> 中间件原理</h2> <p>中间件的核心要搞懂app.use() &amp;&amp; app.method() 到底做了什么。在构造函数一节中，app继承自 proto， proto定义在 /lib/application.js 文件下。该文件定义了所有挂载到app实例上的方法，比如app.method() || app.use() || app.listen()</p> <h3 id="app-use"><a href="#app-use" class="header-anchor">#</a> app.use()</h3> <p>application.js line 199行有该函数的定义：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  app.use = function use(fn) {
+    // 确定取函数参数的位置
+    var offset = 0;
+    var path = '/';
+
+    // default path to '/'
+    // disambiguate app.use([fn])
+    // 兼容两种模式 app.use([fn])
+    if (typeof fn !== 'function') {
+      var arg = fn;
+
+      while (Array.isArray(arg) &amp;&amp; arg.length !== 0) {
+        arg = arg[0];
+      }
+
+      // first arg is the path
+      if (typeof arg !== 'function') {
+        offset = 1;
+        path = fn;
+      }
+    }
+    // 获取所有的中间件函数，如果有path的话，从第二位参数往后拿到所有函数，否则从第一个往后拿到所有函数
+    var fns = flatten(slice.call(arguments, offset));
+
+    if (fns.length === 0) {
+      throw new TypeError('app.use() requires a middleware function')
+    }
+    ...
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><p>这一部分代码是对app.use()函数的参数处理部分，从代码可以看出，app.use()其实也支持app.use([path, fn])这样的传参，这里定义了一个offset变量以便于在有无path的情况下均能正确拿到所有的中间件函数。slice指向的是 Array.prototype.slice。flatten是对目标的深拷贝。这段代码最后拿到了 fns，一个由中间件函数组成的数组。</p> <p>application.js line 228 初始化路由参数</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  this.lazyrouter();
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>application.js line 146</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  app.lazyrouter = function lazyrouter() {
+    // 初始化router实例并挂载到this._router上
+    if (!this._router) {
+      this._router = new Router({
+        caseSensitive: this.enabled('case sensitive routing'),
+        strict: this.enabled('strict routing')
+      });
+
+      this._router.use(query(this.get('query parser fn')));
+      this._router.use(middleware.init(this));
+    }
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>初始化router的时候传入了两个默认的中间件，这两个中间件没有任何path,代表任何路径都会匹配到，query()和middleware()这两个中间件的作用是什么呢？</p> <p>/lib/middleware/query.js</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  module.exports = function query(options) {
+    var opts = merge({}, options)
+    // qs.parse =&gt; key=value =&gt; {key: value}
+    var queryparse = qs.parse;
+    
+    // options可以传function，此时 queryparse 为qs.parse(str, { allowPrototype: true});
+    if (typeof options === 'function') {
+      queryparse = options;
+      opts = undefined;
+    }
+    // 不是函数的话手动设置opts.allowPrototypes 为true
+    if (opts !== undefined &amp;&amp; opts.allowPrototypes === undefined) {
+      // back-compat for qs module
+      opts.allowPrototypes = true;
+    }
+
+    return function query(req, res, next){
+      if (!req.query) {
+        // req.query =&gt; Object的类型
+        var val = parseUrl(req).query;
+        req.query = queryparse(val, opts);
+      }
+
+      next();
+    };
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br></div></div><p>由以上代码可以看出query()中间件的作用是将请求的url参数比如：/path?id=2 转化成{id: 2}，并挂载到req.query属性上。转化用了 qs.parse()方法。</p> <p>/lib/middleware/init.js line28</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  exports.init = function(app){
+    return function expressInit(req, res, next){
+      if (app.enabled('x-powered-by')) res.setHeader('X-Powered-By', 'Express');
+      req.res = res;
+      res.req = req;
+      req.next = next;
+
+      setPrototypeOf(req, app.request)
+      setPrototypeOf(res, app.response)
+
+      res.locals = res.locals || Object.create(null);
+
+      next();
+    };
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>middleware.init(this) 初始化中间件，设置响应头 X-Powered-By 为express，将res挂载到req上，req挂载到res上。（这样做的目的是什么？）。</p> <p>application.js line 228 - 237</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  app.use = function use(fn) {
+    ...
+    this.lazyrouter();
+    var router = this._router;
+
+    fns.forEach(function (fn) {
+      // non-express app
+      if (!fn || !fn.handle || !fn.set) {
+        // 执行 router 的use方法
+        return router.use(path, fn);
+      }
+    }
+    ... 
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>拿到fns也就是所有中间件函数组成的数组后，它会逐个遍历，然后判断fn是否有handle属性和set属性，如果有的话，就默认是express app，否则就是非express app，如果不是express app，那么就将path，和fn传入到router.use()里。router就是之前刚刚初始化的router实例。（假如一个自定义中间件有handle和set属性也是自定义的，它是不是也就走到express app分支里了？），这里的关键是router.use()方法。</p> <p>/lib/router/index.js line 43 - 60</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  var proto = module.exports = function(options) {
+    var opts = options || {};
+
+    function router(req, res, next) {
+      router.handle(req, res, next);
+    }
+
+    // mixin Router class functions
+    setPrototypeOf(router, proto)
+
+    router.params = {};
+    router._params = [];
+    router.caseSensitive = opts.caseSensitive;
+    router.mergeParams = opts.mergeParams;
+    router.strict = opts.strict;
+    router.stack = [];
+
+    return router;
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p>router的构造函数，new Router() 之后返回一个router对象，这个对象挂载了一系列属性，比较重要的是stack属性，用来存layer的。</p> <p>/lib/router/index.js line 454 - 475</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  proto.use = function use(fn) {
+    ...
+
+    for (var i = 0; i &lt; callbacks.length; i++) {
+      var fn = callbacks[i];
+
+      if (typeof fn !== 'function') {
+        throw new TypeError('Router.use() requires a middleware function but got a ' + gettype(fn))
+      }
+
+      // add the middleware
+      debug('use %o %s', path, fn.name || '&lt;anonymous&gt;')
+      // 创建layer
+      var layer = new Layer(path, {
+        sensitive: this.caseSensitive,
+        strict: false,
+        end: false
+      }, fn);
+      // 如果是普通中间件 layer.route 置为undefined
+      layer.route = undefined;
+      // 将layer保存到router.stack里
+      this.stack.push(layer);
+    }
+    return this;
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><p>router.use()前半部分也是参数处理，和app.use()一样，最后拿到callbacks也就是中间件函数数组，遍历之后针对每一个fn创建一个layer对象，并把layer对象保存到router.stack里，该stack是在构造函数里定义的。</p> <p>/lib/router/layer.js</p> <p>该文件定义了layer的构造函数，错误中间件 | 普通中间件的处理，以及layer的匹配方法。</p> <h3 id="app-method"><a href="#app-method" class="header-anchor">#</a> app.method()</h3> <p>app.method() 也就是app.get() | app.post() 等方法的总称。</p> <p>/lib/application.js line 490 - 502</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  methods.forEach(function(method){
+    app[method] = function(path){
+      if (method === 'get' &amp;&amp; arguments.length === 1) {
+        // app.get(setting)
+        return this.set(path);
+      }
+
+      this.lazyrouter();
+
+      var route = this._router.route(path);
+      route[method].apply(route, slice.call(arguments, 1));
+      return this;
+    };
+});
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>这段代码主要是创建route实例，然后执行相应的route[method]方法。我们看下router.route()方法做了什么。</p> <p>/lib/router/index.js line 491 - 504</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  proto.route = function route(path) {
+    var route = new Route(path);
+    // 创建layer对象
+    var layer = new Layer(path, {
+      sensitive: this.caseSensitive,
+      strict: this.strict,
+      end: true
+    }, route.dispatch.bind(route));
+
+    // layer.route 属性置为route
+    layer.route = route;
+    // layer 放到stack里
+    this.stack.push(layer);
+    return route;
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>router.route 会先创建一个 route 对象，然后再创建一个 layer，layer 的 route 属性指向 route 对象，这一点和app.use()不同，然后也是将layer放到router.stack数组里。</p> <p>/lib/router/route.js line 43 - 51</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function Route(path) {
+    this.path = path;
+    this.stack = [];
+
+    debug('new %o', path)
+
+    // route handlers for various http methods
+    this.methods = {};
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>route实例的构造函数，route实例有三个属性，path通过 router.route(path) 传递进来，stack不同于router中的stack，methods是干啥的？</p> <p>route.js line 192 - 216</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  methods.forEach(function(method){ 
+    Route.prototype[method] = function(){
+      var handles = flatten(slice.call(arguments));
+
+      for (var i = 0; i &lt; handles.length; i++) {
+        var handle = handles[i];
+
+        if (typeof handle !== 'function') {
+          var type = toString.call(handle);
+          var msg = 'Route.' + method + '() requires a callback function but got a ' + type
+          throw new Error(msg);
+        }
+
+        debug('%s %o', method, this.path)
+
+        var layer = Layer('/', {}, handle);
+        layer.method = method;
+
+        this.methods[method] = true;
+        this.stack.push(layer);
+      }
+
+      return this;
+    };
+  });
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><p>在route里执行相应的Method方法，其实也创建一个layer，每一个layer对应一个中间件函数，最后push到route.stack里。</p> <h3 id="梳理"><a href="#梳理" class="header-anchor">#</a> 梳理</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>  var requestTime = function (req, res, next) {
+    req.requestTime = Date.now()
+    next()
+  }
+  app.use(express.static('dist'))
+
+  app.use(requestTime)
+
+  app.post('/helo', function (req, res) {
+    console.log(req.query)
+    var responseText = 'Hello World!&lt;br&gt;'
+    responseText += '&lt;small&gt;Requested at: ' + req.requestTime + '&lt;/small&gt;'
+    res.send(responseText)
+  })
+
+  
+  app.listen(3000)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>在这里例子中用了三个中间件，加上初始化两个中间件，一共五个中间件。示例图如下：</p> <p><img src="/assets/img/app._router.stack.31d5a93d.png" alt="solar"></p> <p style="text-align:center;">中间件示例图</p> <h3 id="匹配"><a href="#匹配" class="header-anchor">#</a> 匹配</h3> <p>中间件函数被存到layer里，那么这些中间件函数是如何触发的呢？</p> <p>appliction.js 634 - 637</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  app.listen = function listen() {
+    var server = http.createServer(this);
+    return server.listen.apply(server, arguments);
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>app实例作为 http.createServer 的回调，每次有请求进来都会执行 app()。</p> <p>express.js 37 - 40</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>function createApplication() {
+  var app = function(req, res, next) {
+    app.handle(req, res, next);
+  };
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>app也是一个函数，执行app(req, res, next) 也就是执行app.handle()</p> <p>appliction.js 168 - 185</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  app.handle = function handle(req, res, callback) {
+    var router = this._router;
+
+    // final handler
+    var done = callback || finalhandler(req, res, {
+      env: this.get('env'),
+      onerror: logerror.bind(this)
+    });
+
+    // no routes
+    if (!router) {
+      debug('no routes defined on app');
+      done();
+      return;
+    }
+
+    router.handle(req, res, done);
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>app.handle 针对app上不存在_router的情况做了特殊处理，最后调用了app._router.handle。</p> <p>/lib/router/index.js line 219 - 257</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>proto.handle = function handle(req, res, out) {
+  ...
+  var layer;
+  var match;
+  var route;
+  while (match !== true &amp;&amp; idx &lt; stack.length) {
+    layer = stack[idx++];
+    match = matchLayer(layer, path);
+    route = layer.route;
+
+    if (typeof match !== 'boolean') {
+      // hold on to layerError
+      layerError = layerError || match;
+    }
+
+    if (match !== true) {
+      continue;
+    }
+
+    if (!route) {
+      // process non-route handlers normally
+      continue;
+    }
+
+    if (layerError) {
+      // routes do not match with a pending error
+      match = false;
+      continue;
+    }
+
+    var method = req.method;
+    var has_method = route._handles_method(method);
+
+    // build up automatic options response
+    if (!has_method &amp;&amp; method === 'OPTIONS') {
+      appendMethods(options, route._options());
+    }
+
+    // don't even bother matching route
+    if (!has_method &amp;&amp; method !== 'HEAD') {
+      match = false;
+      continue;
+    }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br></div></div><p>循环终止条件是匹配不到path，并且计数器大于_router.stack.length, 先调用 matchLayer 函数对 layer 和 path 进行匹配，matchLayer 实际上调用的是 Layer.prototype.match 方法，该方法通过挂载到layer.regexp上的正则和 path进行匹配，最后返回true或者false，匹配成功的话还会解析param挂载到layer.params上。</p> <p>循环里主要处理路由中间件的情况，我们知道路由中间件的 layer.route 指向的是一个route实例，应用级别的中间件指向的是undefined，当是路由中间件的情况下，会调用 Route.prototype._handles_method() 方法，该方法的定义在 /lib/router/route.js里。该方法返回 true 或者 false，代表传入的参数是否是支持的 http 方法。如果 http 请求是options，它会将Express支持的请求方式转化成数组存放在options里。</p> <p>/lib/router/index.js line 276 - 286</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  self.process_params(layer, paramcalled, req, res, function (err) {
+    if (err) {
+      return next(layerError || err);
+    }
+
+    if (route) {
+      return layer.handle_request(req, res, next);
+    }
+
+    trim_prefix(layer, layerError, layerPath, path);
+  });
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>路由匹配成功且为路由级别的中间件，执行 Layer.prototype.handle_request() 方法，否则调用trim_prefix() 标准化req.url | req.baseUrl，最后再调用 Layer.prototype.handle_request() 方法。</p> <p>/lib/router/layer.js line 86 - 99</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  Layer.prototype.handle_request = function handle(req, res, next) {
+    var fn = this.handle;
+
+    if (fn.length &gt; 3) {
+      // not a standard request handler
+      return next();
+    }
+
+    try {
+      fn(req, res, next);
+    } catch (err) {
+      next(err);
+    }
+} ;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>如果参数大于三个跳过，否则执行layer.handle上挂载的中间件函数，执行完毕调用 next() 函数，将路由控制权交给下一个中间件。</p> <h3 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h3> <p><img src="/assets/img/b.fb67d8d2.jpg" alt="solar"></p> <p style="text-align:center;">路由匹配</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/express/ex.html" class="prev">
+        一、构造函数
+      </a></span> <span class="next"><a href="/blog/express/in.html">
+        三、内置中间件
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.12380ca6.js" defer></script><script src="/assets/js/2.cfd58636.js" defer></script><script src="/assets/js/5.a62e1c37.js" defer></script>
+  </body>
+</html>

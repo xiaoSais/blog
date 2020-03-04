@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>六、拦截器 | Secret</title>
+    <meta name="description" content="Just playing around">
+    <meta name="generator" content="VuePress 1.3.1">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.aee194d5.css" as="style"><link rel="preload" href="/assets/js/app.12380ca6.js" as="script"><link rel="preload" href="/assets/js/2.cfd58636.js" as="script"><link rel="preload" href="/assets/js/20.421983e6.js" as="script"><link rel="prefetch" href="/assets/js/10.c30585d1.js"><link rel="prefetch" href="/assets/js/11.2fb492b5.js"><link rel="prefetch" href="/assets/js/12.4ce3828a.js"><link rel="prefetch" href="/assets/js/13.b7ba9b2d.js"><link rel="prefetch" href="/assets/js/14.0bf1f2b9.js"><link rel="prefetch" href="/assets/js/15.0f64fc68.js"><link rel="prefetch" href="/assets/js/16.ed96dff6.js"><link rel="prefetch" href="/assets/js/17.ec348c71.js"><link rel="prefetch" href="/assets/js/18.db1b9aa0.js"><link rel="prefetch" href="/assets/js/19.2119ca99.js"><link rel="prefetch" href="/assets/js/21.89882d03.js"><link rel="prefetch" href="/assets/js/22.4354cee5.js"><link rel="prefetch" href="/assets/js/23.e98422f5.js"><link rel="prefetch" href="/assets/js/24.64903d0f.js"><link rel="prefetch" href="/assets/js/25.6b0f62f2.js"><link rel="prefetch" href="/assets/js/26.3167e0b9.js"><link rel="prefetch" href="/assets/js/27.87fca6b4.js"><link rel="prefetch" href="/assets/js/28.9679f207.js"><link rel="prefetch" href="/assets/js/29.6922ef3d.js"><link rel="prefetch" href="/assets/js/3.b0c069e6.js"><link rel="prefetch" href="/assets/js/30.d939c463.js"><link rel="prefetch" href="/assets/js/31.f7dfaa09.js"><link rel="prefetch" href="/assets/js/32.1adb14ce.js"><link rel="prefetch" href="/assets/js/33.80fd4dc1.js"><link rel="prefetch" href="/assets/js/34.5489d530.js"><link rel="prefetch" href="/assets/js/35.0f6b6028.js"><link rel="prefetch" href="/assets/js/36.95f54780.js"><link rel="prefetch" href="/assets/js/37.f8cb9cb2.js"><link rel="prefetch" href="/assets/js/38.2bb255cd.js"><link rel="prefetch" href="/assets/js/39.54a4d20e.js"><link rel="prefetch" href="/assets/js/4.eaa24ed2.js"><link rel="prefetch" href="/assets/js/40.fc2cbac6.js"><link rel="prefetch" href="/assets/js/41.3c407481.js"><link rel="prefetch" href="/assets/js/5.a62e1c37.js"><link rel="prefetch" href="/assets/js/6.bdef66e2.js"><link rel="prefetch" href="/assets/js/7.17c555f8.js"><link rel="prefetch" href="/assets/js/8.ffccb86b.js"><link rel="prefetch" href="/assets/js/9.7ffd6f2e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.aee194d5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Secret</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/document/swiper.html" class="nav-link">
+  技术文档
+</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/document/swiper.html" class="nav-link">
+  技术文档
+</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>技术文档</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>深入axios</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/axios/tools.html" class="sidebar-link">一、工具类</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/axios/constructor.html" class="sidebar-link">二、axios实例</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/axios/config.html" class="sidebar-link">三、默认配置项</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/axios/mergeConfig.html" class="sidebar-link">四、选项合并</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/axios/Axios.html" class="sidebar-link">五、Axios 核心类</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/axios/Interceptors.html" class="active sidebar-link">六、拦截器</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/axios/Dispatch.html" class="sidebar-link">七、请求分发 &amp;&amp; 适配器</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Express</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Node.js</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>算法</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>跨域</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>学习轨迹</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>散文随笔</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="六、拦截器"><a href="#六、拦截器" class="header-anchor">#</a> 六、拦截器</h1> <p>相关文件路径 /lib/core/Axios.js &amp;&amp; /lib/core/InterceptorManager.js</p> <h3 id="何为拦截器"><a href="#何为拦截器" class="header-anchor">#</a> 何为拦截器</h3> <p>拦截器（InterceptorManager）其实是一个中间件，axios 定义了两种 interceptor（axios.interceptors.request 和 axios.interceptors.response）在axios发起请求前或者请求后调用，用于变更 config |  response。</p> <h3 id="注册拦截器"><a href="#注册拦截器" class="header-anchor">#</a> 注册拦截器</h3> <p>1、eg: 使用 axios 正常发起发起请求：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  axios['get']('http://10.199.214.233:9876/vqp/config')
+    .then(response =&gt; {
+      console.log(response)
+    }).catch(err =&gt; {
+      console.log(err)
+    })
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>打印出来的 response 除了接口返回的数据外，还有配置项等信息：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  {
+    // 接口返回数据
+    data: [],
+    // 响应状态
+    status: 200,
+    // 响应状态描述
+    statusText: 'ok',
+    // 响应头
+    headers: {
+      content-length: &quot;6502&quot;,
+      content-type: &quot;application/json; charset=utf-8&quot;
+    },
+    // axios 配置信息
+    config: {},
+    // 响应对象
+    request: {}
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>2、eg: 使用 interceptor</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  // 增加请求前的拦截器
+  axios.interceptors.request.use(function (config) {
+      // 发起请求之前改变 axios 配置，修改超时时间
+      config.timeout = 200
+      return config;
+    }, function (error) {
+      // 请求出错在这可以处理
+      return Promise.reject(error);
+    });
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>  // 增加响应后、返回前拦截器
+  axios.interceptors.response.use(function (response) {
+      // 处理响应数据，如果响应状态为200，只返回 response.data 和 response.config
+      if (response.status === 200) {
+        return {
+          data: response.data,
+          config: response.config
+        }
+      } else return 'error'
+    }, function (error) {
+      // 相应出错可以在这里处理
+      return Promise.reject(error);
+    });
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>打印出来的response为：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  {
+    data: [],
+    config: {
+      ...,
+      timeout: 200
+    }
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>axios对拦截器的处理顺序为：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  axios.interceptors.request =&gt; axios[method] =&gt;  axios.interceptors.response
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>分别对应三个阶段：还未发起请求(interceptors.request[config]) =&gt; 发起请求并根据后端响应拿到Response =&gt; 处理请求（interceptors.response[Response]）=&gt; 返回处理后的Response</p> <h3 id="注销拦截器"><a href="#注销拦截器" class="header-anchor">#</a> 注销拦截器</h3> <p>可以使用 axios.interceptors.request.eject(interceptor) | axios.interceptors.response.eject(interceptor) 来移除拦截器</p> <p>eg:</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  // 添加拦截器
+  var interceptor = axios.interceptors.request.use(function (config) {
+      // 发起请求之前改变 axios 配置，修改超时时间
+      config.timeout = 200
+      return config;
+    }, function (error) {
+      // 请求出错在这可以处理
+      return Promise.reject(error);
+    });
+  // 发起请求，拦截器生效
+  axios['get']('http://10.199.214.233:9876/vqp/config')
+    .then(response =&gt; {
+      // 200
+      console.log(response.config.timeout)
+    }).catch(err =&gt; {
+      console.log(err)
+    })
+  
+  // 注销拦截器
+  axios.interceptors.request.eject(interceptor)
+  // 发起请求，测试拦截器是否已经注销
+  axios['get']('http://10.199.214.233:9876/vqp/config')
+    .then(response =&gt; {
+      // 0
+      console.log(response.config.timeout)
+    }).catch(err =&gt; {
+      console.log(err)
+    })
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div><h3 id="axios-拦截器原理"><a href="#axios-拦截器原理" class="header-anchor">#</a> axios 拦截器原理</h3> <p>文件路径： /lib/core/Axios.js</p> <p>在 Axios 构造函数里创建了一个interceptors 对象。保存 Request 和 Response 的 interceptor 实例。这也是我们可以使用 axios.interceptors.request |  axios.interceptors.response 的原因。</p> <p>line: 14 - 20</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function Axios(instanceConfig) {
+    this.defaults = instanceConfig;
+    this.interceptors = {
+      request: new InterceptorManager(),
+      response: new InterceptorManager()
+    };
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>InterceptorManager 构造函数， 在文件 /lib/InterceptorManager.js 里定义，这个文件很短，只有52行：</p> <h4 id="构造函数"><a href="#构造函数" class="header-anchor">#</a> 构造函数</h4> <p>InterceptorManager 构造函数为实例创建了一个   handlers 数组用于保存拦截器的处理函数。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function InterceptorManager() {
+    this.handlers = [];
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="interceptormanager-prototype-use-resolve-reject"><a href="#interceptormanager-prototype-use-resolve-reject" class="header-anchor">#</a> InterceptorManager.prototype.use(resolve, reject)</h4> <p>前面举例说了一下拦截器的使用方式，再贴一下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  var interceptor = axios.interceptors.request.use(function (config) {
+      // 发起请求之前改变 axios 配置，修改超时时间
+      config.timeout = 200
+      return config;
+    }, function (error) {
+      // 请求出错在这可以处理
+      return Promise.reject(error);
+    });
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>当调用 axios.interceptors.response.use 的时候，实际上就是调用的InterceptorManager.prototype.use 这个方法，这个方法返回拦截器的Id，以便于有需要的话注销该拦截器。</p> <p>line: 17 - 23</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+    this.handlers.push({
+      fulfilled: fulfilled,
+      rejected: rejected
+    });
+    return this.handlers.length - 1;
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>调用 use 的时候，往 handles 数组里 push 一个对象，该对象的两个属性分别对应 Promise.then 和 Primise.reject 需要处理的函数，也就是调用的时候传的两个参数。</p> <h4 id="interceptormanager-prototype-eject-id"><a href="#interceptormanager-prototype-eject-id" class="header-anchor">#</a> InterceptorManager.prototype.eject(id)</h4> <p>注销拦截器即调用该函数，将对应Id的拦截器对象置位 null。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  InterceptorManager.prototype.eject = function eject(id) {
+    if (this.handlers[id]) {
+      this.handlers[id] = null;
+    }
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>id 即为use的时候返回的拦截器的idx。</p> <h4 id="interceptormanager-prototype-foreach-fn-interceptor"><a href="#interceptormanager-prototype-foreach-fn-interceptor" class="header-anchor">#</a> InterceptorManager.prototype.forEach(fn(interceptor))</h4> <p>该方法用于遍历拦截器，interceptor 即为 handles 里的每一个元素，同时该函数会跳过为 null 的元素。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  InterceptorManager.prototype.forEach = function forEach(fn) {
+    utils.forEach(this.handlers, function forEachHandler(h) {
+      if (h !== null) {
+        fn(h);
+      }
+    });
+  };
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>给 util.forEach 封装了一层。</p> <h4 id="调用"><a href="#调用" class="header-anchor">#</a> 调用</h4> <p>上面分析完了 interceptor 类的所有方法，来看看在Axios内部是如何处理的，文件同样是 /lib/core/Axios.js。</p> <p>line: 50 - 51</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  Axios.prototype.request = function request(config) {
+
+    ...
+    var chain = [dispatchRequest, undefined];
+    var promise = Promise.resolve(config);
+
+    this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+      chain.unshift(interceptor.fulfilled, interceptor.rejected);
+    });
+
+    this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+      chain.push(interceptor.fulfilled, interceptor.rejected);
+    });
+
+    while (chain.length) {
+      promise = promise.then(chain.shift(), chain.shift());
+    }
+    return promise;
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p>1、request 函数在内部创建名为 chain 队列，该队列保存所有需要执行的 Promise 方法。初始化两个元素 dispatchRequest和 undefined，dispatchRequest 为真正处理 axios[method]成功的promise，undefined是为了处理失败时候情况。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  var chain = [dispatchRequest, undefined];
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>2、创建一个基于 axios.config 的 promise 对象。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  var promise = Promise.resolve(config);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>3、上文提到当我们使用对应的 interceptor.use 的时候，会向 handles 放入对应的处理函数。在执行axios[method]方法时，会遍历handles，针对两种拦截器（request | response）会分别在 chain 的队头 | 队尾添加这些处理函数，一次会同时添加两个处理函数，即成功时的和失败时的。如果设置拦截器的话 chain 队列会变成这样：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  [requestResolve,  requestReject, dispatchRequest, undefined, responseREsolve, responseReject]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>4、依次拿出队头元素作为 promise.then() 对象的参数，直到队列为空。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  while (chain.length) {
+    promise = promise.then(chain.shift(), chain.shift());
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>因为 promise 是基于 axios.config 创建，所以在执行 requestResolve 的时候拿到的参数就是 axios.config。promise.then() 方法由于返回的是新promise，所以这边要将 promise 重新赋值，用于将上一步的结果传递给下一个promise。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/axios/Axios.html" class="prev">
+        五、Axios 核心类
+      </a></span> <span class="next"><a href="/blog/axios/Dispatch.html">
+        七、请求分发 &amp;&amp; 适配器
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.12380ca6.js" defer></script><script src="/assets/js/2.cfd58636.js" defer></script><script src="/assets/js/20.421983e6.js" defer></script>
+  </body>
+</html>
