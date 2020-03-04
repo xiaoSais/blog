@@ -5,6 +5,11 @@ install:
   - npm install # npm ci
 script:
   - npm run build # npm run docs:build
+after_script:
+  - cd docs/.vuepress/dist
+  - git add -A
+  - git commit -m 'deploy'
+  - git push -f git@github.com:xiaoSais/xiaoSais.github.io.git master
 deploy:
   provider: pages
   skip_cleanup: true
