@@ -1,0 +1,30 @@
+<html>
+  <body>
+    <div>page</div>
+  </body>
+
+</html>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+  
+  function getArticleData(data) {
+    console.log(data.name)
+  }
+  const qs = {
+    stringify: function (obj) {
+      if (typeof obj !== 'object') throw new Error('not obj')
+      else return Object.keys(obj).map(key => `${key}=${obj[key]}`).join('&')
+    }
+  }
+  function sendJsonpRequest(callbackName, url, params) {
+    let jsonpDom = document.querySelector('#jsonp')
+    if (jsonpDom) document.querySelector('body').removeChild(jsonpDom)
+    const s = document.createElement('script')
+    const param = qs.stringify(Object.assign({ callback: callbackName }, params))
+    s.src = `${url}?${param}`
+    s.id = 'jsonp'
+    document.querySelector('body').appendChild(s)
+  }
+  sendJsonpRequest('getArticleData', 'http://localhost:3000/login', {id: 2})
+</script>
