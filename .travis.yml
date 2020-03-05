@@ -5,11 +5,6 @@ install:
   - npm install # npm ci
 script:
   - npm run build # npm run docs:build
-after_script:
-  - cd docs/.vuepress/dist
-  - git add -A
-  - git commit -m 'deploy'
-  - git push --force --quiet "https://${GITHUB_TOKEN}@${GH_REF}" master
 deploy:
   provider: pages
   skip_cleanup: true
