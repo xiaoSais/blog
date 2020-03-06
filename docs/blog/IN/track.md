@@ -19,5 +19,9 @@
   - [x] Element.js
 
 ### 算法
-  - [3/4] 剑指 offer 5 / 67, leetcode 0 / 100
+  - [3/4] 剑指 offer <span style="color: red">5</span> / 67, leetcode <span style="color: red">0</span> / 100、rest: 62 / 100
+
+  - [3/5] 剑指 offer <span style="color: red">5</span> / 67, leetcode <span style="color: red">0</span> / 100、rest: 57 / 100
+  
+  - [3/6] 剑指 offer <span style="color: red">5</span> / 67, leetcode <span style="color: red">0</span> / 100、rest: 52 / 100
 
