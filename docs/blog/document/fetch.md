@@ -1,5 +1,7 @@
 # 八、fetch Api
 
+## 与 XMLHttpRequest 的异同
+
 浏览器提供全局 fecth 方法，可以看做是 XMLHttpRequest 的替代品。
 
 它与后者的区别主要有三点：
