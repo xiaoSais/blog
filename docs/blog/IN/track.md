@@ -28,3 +28,10 @@
   - [3/9] 剑指 offer <span style="color: red">3</span> / 67, leetcode <span style="color: red">0</span> / 100、rest: 49 / 100
 
   - [3/10] 剑指 offer <span style="color: red">5</span> / 67, leetcode <span style="color: red">0</span> / 100、rest: 44 / 100
+
+  - [3/11] 剑指 offer <span style="color: red">5</span> / 67, leetcode <span style="color: red">0</span> / 100、rest: 39 / 100
+  
+### 计算机基础
+
+  - http 缓存、http1.0 && http2.0 && http1.1、https
+  - http 状态码，方法都有哪些，DNS 查询过程，DNS缓存位置。UDP 和 TCP 区别。三次握手，四次握手。
