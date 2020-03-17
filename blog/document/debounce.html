@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>九、深入理解防抖和节流 | Secret</title>
+    <meta name="description" content="Just playing around">
+    <meta name="generator" content="VuePress 1.3.1">
+    
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.aeb91cb6.css" as="style"><link rel="preload" href="/blog/assets/js/app.a02fb727.js" as="script"><link rel="preload" href="/blog/assets/js/2.cfd58636.js" as="script"><link rel="preload" href="/blog/assets/js/27.dad67f7e.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.ec9f41b5.js"><link rel="prefetch" href="/blog/assets/js/11.34bd1eb0.js"><link rel="prefetch" href="/blog/assets/js/12.6fe25485.js"><link rel="prefetch" href="/blog/assets/js/13.d2c5ef0e.js"><link rel="prefetch" href="/blog/assets/js/14.799bb7d1.js"><link rel="prefetch" href="/blog/assets/js/15.abc3e3ec.js"><link rel="prefetch" href="/blog/assets/js/16.9cbb90bd.js"><link rel="prefetch" href="/blog/assets/js/17.f5b9d8ed.js"><link rel="prefetch" href="/blog/assets/js/18.10d7410d.js"><link rel="prefetch" href="/blog/assets/js/19.4448486c.js"><link rel="prefetch" href="/blog/assets/js/20.b2701607.js"><link rel="prefetch" href="/blog/assets/js/21.ec5f9c8b.js"><link rel="prefetch" href="/blog/assets/js/22.aee9574a.js"><link rel="prefetch" href="/blog/assets/js/23.0d4a512c.js"><link rel="prefetch" href="/blog/assets/js/24.33f5e83b.js"><link rel="prefetch" href="/blog/assets/js/25.fa6da868.js"><link rel="prefetch" href="/blog/assets/js/26.65d2c9b4.js"><link rel="prefetch" href="/blog/assets/js/28.3821a5bb.js"><link rel="prefetch" href="/blog/assets/js/29.7e469541.js"><link rel="prefetch" href="/blog/assets/js/3.ad792a62.js"><link rel="prefetch" href="/blog/assets/js/30.26ee50f3.js"><link rel="prefetch" href="/blog/assets/js/31.4195409d.js"><link rel="prefetch" href="/blog/assets/js/32.941420cc.js"><link rel="prefetch" href="/blog/assets/js/33.1e496f8c.js"><link rel="prefetch" href="/blog/assets/js/34.fb13ced9.js"><link rel="prefetch" href="/blog/assets/js/35.d7c17811.js"><link rel="prefetch" href="/blog/assets/js/36.7cbe0f45.js"><link rel="prefetch" href="/blog/assets/js/37.88cdf355.js"><link rel="prefetch" href="/blog/assets/js/38.b553d09f.js"><link rel="prefetch" href="/blog/assets/js/39.82255c8c.js"><link rel="prefetch" href="/blog/assets/js/4.6722820a.js"><link rel="prefetch" href="/blog/assets/js/40.1da4a979.js"><link rel="prefetch" href="/blog/assets/js/41.51db5b52.js"><link rel="prefetch" href="/blog/assets/js/42.f6a92f41.js"><link rel="prefetch" href="/blog/assets/js/43.4e7741ec.js"><link rel="prefetch" href="/blog/assets/js/44.486975c4.js"><link rel="prefetch" href="/blog/assets/js/5.51edc8b7.js"><link rel="prefetch" href="/blog/assets/js/6.592a4577.js"><link rel="prefetch" href="/blog/assets/js/7.17c555f8.js"><link rel="prefetch" href="/blog/assets/js/8.7a7f85d3.js"><link rel="prefetch" href="/blog/assets/js/9.aab96ac5.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.aeb91cb6.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">Secret</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/blog/document/swiper.html" class="nav-link">
+  技术文档
+</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/blog/document/swiper.html" class="nav-link">
+  技术文档
+</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>技术文档</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/blog/document/swiper.html" class="sidebar-link">一、swiper插件的坑，你了解多少</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#引入和基本用法" class="sidebar-link">引入和基本用法</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#配置选项" class="sidebar-link">配置选项</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#swiper实例" class="sidebar-link">swiper实例</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#样式调整" class="sidebar-link">样式调整</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#sidespreview相关" class="sidebar-link">sidesPreview相关</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#边距相关" class="sidebar-link">边距相关</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#loop相关" class="sidebar-link">Loop相关</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#异步加载" class="sidebar-link">异步加载</a></li></ul></li><li><a href="/blog/blog/document/infiniate.html" class="sidebar-link">二、你真的了解无限加载组件吗？</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/infiniate.html#总结" class="sidebar-link">总结</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/infiniate.html#vue-scroller" class="sidebar-link">vue-scroller</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/infiniate.html#vue-infinite-loading" class="sidebar-link">vue-infinite-loading</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/infiniate.html#vue-infinite-scroll" class="sidebar-link">vue-infinite-scroll</a></li></ul></li><li><a href="/blog/blog/document/YUIDoc.html" class="sidebar-link">三、YUIDoc不完全指北</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/YUIDoc.html#安装" class="sidebar-link">安装</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/YUIDoc.html#语法" class="sidebar-link">语法</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/YUIDoc.html#文档生成" class="sidebar-link">文档生成</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/YUIDoc.html#进展" class="sidebar-link">进展</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/YUIDoc.html#收获与总结" class="sidebar-link">收获与总结</a></li></ul></li><li><a href="/blog/blog/document/mini.html" class="sidebar-link">四、初识微信小程序</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/mini.html#页面调试（自定义编译配置）" class="sidebar-link">页面调试（自定义编译配置）</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/mini.html#微信小程序生命周期" class="sidebar-link">微信小程序生命周期</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/mini.html#模板消息（消息推送）" class="sidebar-link">模板消息（消息推送）</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/mini.html#自定义组件" class="sidebar-link">自定义组件</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/mini.html#小程序跳转类" class="sidebar-link">小程序跳转类</a></li></ul></li><li><a href="/blog/blog/document/fenxi.html" class="sidebar-link">五、JS循环语句中的性能分析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/fenxi.html#描述" class="sidebar-link">描述</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fenxi.html#种类" class="sidebar-link">种类</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fenxi.html#结论" class="sidebar-link">结论</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fenxi.html#附录" class="sidebar-link">附录</a></li></ul></li><li><a href="/blog/blog/document/this.html" class="sidebar-link">六、关于this</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/this.html#总结" class="sidebar-link">总结</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/this.html#this的四种绑定方式" class="sidebar-link">this的四种绑定方式</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/this.html#优先级" class="sidebar-link">优先级</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/this.html#例子" class="sidebar-link">例子</a></li></ul></li><li><a href="/blog/blog/document/grid.html" class="sidebar-link">七、CSS grid</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/grid.html#容器属性" class="sidebar-link">容器属性</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/grid.html#项目属性" class="sidebar-link">项目属性</a></li></ul></li><li><a href="/blog/blog/document/fetch.html" class="sidebar-link">八、fetch Api</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/fetch.html#与-xmlhttprequest-的异同" class="sidebar-link">与 XMLHttpRequest 的异同</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fetch.html#response-对象" class="sidebar-link">Response 对象</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fetch.html#request-对象" class="sidebar-link">Request 对象</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fetch.html#headers-对象" class="sidebar-link">Headers 对象</a></li></ul></li><li><a href="/blog/blog/document/debounce.html" class="active sidebar-link">九、深入理解防抖和节流</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/debounce.html#防抖-（debounce）" class="sidebar-link">防抖 （debounce）</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>深入axios</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Express</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Node.js</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>算法</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>跨域</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>学习轨迹</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>散文随笔</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="九、深入理解防抖和节流"><a href="#九、深入理解防抖和节流" class="header-anchor">#</a> 九、深入理解防抖和节流</h1> <h2 id="防抖-（debounce）"><a href="#防抖-（debounce）" class="header-anchor">#</a> 防抖 （debounce）</h2> <div class="custom-block tip"><p class="custom-block-title">TIP</p> <div class="language- extra-class"><pre><code>在 N 秒后执行函数的回调，如果在这期间函数如果再次被调用，那么计时器将重新计时。
+</code></pre></div></div> <p>简单来说，就是在设定的时间内如果一直调用某个函数，该函数永远不会执行，除非函数调用间隔时间大于设定的时间。</p> <p>一个场景，页面上有个 input 输入框，可以根据用户输入去拿远程数据用于快速搜索：</p> <p>Js:</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function getData (value) { console.log(value) }
+  let ip = document.getElementById('input')
+  ip.addEventListener('keyup', (e) =&gt; {
+    getData(e.target.value)
+  }, false)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>这里用 getData 模拟远程 ajax 操作。</p> <p>用户每输入一次都要请求一次接口，会造成资源的浪费，理论上来说我们只要等到用户输入完成之后再请求是最好的。</p> <p>但是我们也不知道用户输入到哪才算完成。</p> <p>但我们可以设定一个时间间隔，如果相邻两次输入时间间隔小于某个值就不会发起请求。这样是不是就可以减少请求次数了呢。</p> <h3 id="延迟执行"><a href="#延迟执行" class="header-anchor">#</a> 延迟执行</h3> <p>延迟执行的意思是第一次调用不会执行，连续多次调用的话只执行最后一次。</p> <p>首先为了实现以上功能，debounce 函数可以是一个功能性函数，类似于 bind。并且要传入一个待节流的函数和一个延迟时间，每次调用目标函数的时候会判断内部的定时器，如果存在的话就清除定时器并重新计时。</p> <p><b>延迟执行的 debounce 函数：</b></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  // fn，待处理函数，delay，等待时间
+  function debounce (fn, delay) {
+    let timer
+    return function () {
+      // 缓存 this &amp;&amp; 参数
+      let _this = this
+      let args = arguments
+
+      // 存在计时器，清除并重新计时
+      if (timer) clearTimeout(timer)
+      timer = setTimeout(() =&gt; fn.apply(_this, args), delay)
+    }
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>使用方式：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function getData (value) { console.log(value) }
+  let ip = document.getElementById('input')
+  let debounceData = debounce(getData, 3000)
+  ip.addEventListener('keyup', (e) =&gt; {
+    debounceData(e.target.value)
+  }, false)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>使用方式略微有点不同，利用 debounce 函数创建新的函数，该函数内部保存了 timer 的闭包。可以给这个新函数传参，该参数会被透传到目标函数。</p> <p>延迟执行的小例子：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>let print = debounce(console.log, 0)
+
+print(1)
+print(2)
+print(3)
+print(4)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>因为是延迟执行，函数只会执行最后一次 4。</p> <h3 id="立即执行"><a href="#立即执行" class="header-anchor">#</a> 立即执行</h3> <p>如果我们希望用户第一次输入的时候就开始执行，连续多次调用的话只会执行第一次要如何做呢。</p> <p>借助延迟执行的思路我们要多创建一个变量来判断本次是否可以执行。</p> <p><b>立即执行的 debounce 函数：</b></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  function debounce (fn, delay) {
+    let timer
+    return function () {
+      let _this = this
+      let args = arguments
+
+      if (timer) clearTimeout(timer)
+
+      // 如果 timer 不存在的话证明时间间隔已经超过可以执行
+      callNow = !timer
+      // delay 之后 timer 置为空
+      timer = setTimeout(() =&gt; timer = null, delay)
+      if (callNow) fn.apply(_this, args)
+    }
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>调用方式和延迟执行的函数调用一致。</p> <p>立即执行的小例子：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>let print = debounce(console.log, 0)
+
+print(1)
+print(2)
+print(3)
+print(4)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>因为是延迟执行，所以函数只会执行第一次 1。</p> <h3 id="综合版本的防抖函数"><a href="#综合版本的防抖函数" class="header-anchor">#</a> 综合版本的防抖函数</h3> <p>如下，增加一个参数就行啦。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  /*
+  * fn 目标函数
+  * delay 间隔时间
+  * immediate 是否立即执行
+  */
+  function debounce (fn, delay,immediate = false ) {
+    let timer
+    return function () {
+      // 缓存 this 和传参，保持目标函数调用
+      let _this = this
+      let args = arguments
+
+      // 如果间隔时间小于设定时间，重新计时
+      if (timer) clearTimeout(timer)
+
+      // 立即执行
+      if (immediate) {
+        let callNow = !timer
+        
+        timer = setTimeout(() =&gt; timer = null, delay)
+
+        if (callNow) fn.apply(_this, args)
+      } else {
+        // 延迟执行
+        timer = setTimeout(() =&gt; fn.apply(_this, args), delay)
+      }
+    }
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/blog/document/fetch.html" class="prev">
+        八、fetch Api
+      </a></span> <span class="next"><a href="/blog/blog/axios/tools.html">
+        一、工具类
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/blog/assets/js/app.a02fb727.js" defer></script><script src="/blog/assets/js/2.cfd58636.js" defer></script><script src="/blog/assets/js/27.dad67f7e.js" defer></script>
+  </body>
+</html>
