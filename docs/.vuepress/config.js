@@ -24,7 +24,8 @@ module.exports = {
           '/blog/document/fenxi',
           '/blog/document/this',
           '/blog/document/grid',
-          '/blog/document/fetch'
+          '/blog/document/fetch',
+          '/blog/document/debounce'
         ]
       },
       {
