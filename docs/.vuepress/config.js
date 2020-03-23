@@ -25,7 +25,8 @@ module.exports = {
           '/blog/document/this',
           '/blog/document/grid',
           '/blog/document/fetch',
-          '/blog/document/debounce'
+          '/blog/document/debounce',
+          '/blog/document/application'
         ]
       },
       {
