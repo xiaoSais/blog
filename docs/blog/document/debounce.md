@@ -150,5 +150,59 @@ print(4)
 ```
 
 
+## 节流 （throttle）
 
+  ::: tip
+    在 N 秒内某个函数如果被调用多次，只会执行一次，并且不会重新计时。节流会稀释函数的执行。
+  ::: 
+
+  就好比射击游戏，无论你手速多快，射出去的子弹总是以固定的射速行进。
+
+  有两种版本，第一种 <b>时间戳版: </b>
+
+  ```
+    function throttle (fn, delay) {
+      // 记录上次执行的时间
+      let previous = 0
+
+      return function () {
+        let _this = this
+        let args = arguments
+        // 记录本次调用的时间
+        let now = Date.now()
+
+        if (now - previous >= delay) {
+          fn.apply(_this, args)
+          previous = now
+      }
+    }
+  ```
+第二种 <b>定时器版: </b>
+
+```
+  function throttle (fn, delay) {
+    let timer 
+    return function () {
+      let _this = this
+      let args = arguments
+
+      if (!timer) {
+        timer = setTimeout(() => {
+          fn.apply(_this, args)
+          timer = null
+        }, delay)
+      }
+    }
+  }
+```
+
+他们之间的区别是：
+
+使用时间戳实现的节流函数会在第一次触发事件时立即执行，以后每过 delay 秒之后才执行一次，并且最后一次触发事件不会被执行；而定时器实现的节流函数在第一次触发时不会执行，而是在 delay 秒之后才执行，当最后一次停止触发后，还会再执行一次函数。
+
+## 应用场景
+
+防抖一般用于限制用户输入、搜索次数，减轻资源压力。或者对 window.resize 的调用做出限制。
+
+节流一般用于按钮，防止重复点击，保持在某个时间段内只能调用一次。或者是监听滚动事件，比如是否滑到底部自动加载更多，用throttle来判断。
 
