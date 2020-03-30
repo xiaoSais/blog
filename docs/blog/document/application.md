@@ -1,6 +1,6 @@
 # 十、代码之如何实现？
 
-## 1、如何实现数组的扁平化
+## 1、如何实现数组的扁平化？
 
 什么是数组扁平化？
 
@@ -78,7 +78,7 @@ reduce 只是将写法简化了一点，本质上还是递归的写法
   console.log(flat([1,2,3,4,[4,5], [3,4,[4,5]]]))
 ```
 
-## 2、如何实现数组的随机排序
+## 2、如何实现数组的随机排序？
 
 ### 使用 array.sort() 方法
 
@@ -121,3 +121,113 @@ sort() 方法会对比相邻元素的大小，这里用了 Math.random() 方法�
     return arr
   }
 ```
+
+## 3、JS 如何创建一个对象？
+
+这个创建对象不是创建 JS 的对象数据类型。而是创建实例的方式。
+
+### 工厂模式
+
+工厂模式就是类似于一个工厂一样，在方法内部创建一个对象，在该对象上定义属性和方法，缺点是无法通过 instanceof 判断该对象由哪个构造函数判断。
+
+```
+  function createObj (name, age) {
+    var obj = {}
+    obj.name = name
+    obj.age = age
+    obj.getName = () => alert(obj.name)
+    return obj
+  }
+  let person = createObj ('yy', 23)
+  // yy
+  console.log(person.name) 
+  // false
+  console.log(person instanceof createObj)
+```
+
+### 构造函数模式
+
+和工厂模式差不多，不过无需内部创建一个对象。属性和方法定义在 this 上，创建对象时用 new 操作符创建。优点是可以通过 instanceof 操作符判断创建的对象所属的构造函数。缺点是构造函数定义的函数无法做到共用。每次创建一个对象都要在该对象上定义一个函数。
+
+```
+  function CreateObj (name, age) {
+    this.name = name
+    this.age = age
+    this.getName = function () {
+      alert(this.name)
+    }
+  }
+  let p = new CreateObj('yy', 23)
+  // yy
+  p.getName()
+  // yy
+  console.log(p.name)
+  // 23
+  console.log(p.age)
+  // true
+  console.log(p instanceof CreateObj)
+```
+
+### 原型模式
+
+每个函数都有一个 .prototype 属性，它指该函数的原型，同时该原型对象有个 .constructor 属性指向该构造函数。该函数的实例有个 _proto_ 属性指向该原型对象。当获取某个对象的属性值的时候，先去实例上去找，找不到的话会去该原型对象上去寻找。缺点是所有的属性和方法都是共用的，无法实现对象的特殊化。
+
+```
+  function CreateObjProto () {}
+  CreateObjProto.prototype.name = 'yy'
+  CreateObjProto.prototype.age = '23'
+  CreateObjProto.prototype.getName = function () { alert(this.name) }
+```
+
+更简洁的原型语法
+```
+  function CreateObjProto () {}
+  CreateObjProto.prototype = {
+    constructor: CreateObjProto,
+    name: 'lucy',
+    age: '23',
+    getName: function () { alert(this.name) }
+  }
+```
+
+### 组合模式
+
+需要共享的属性定义在原型上，否则通过构造函数创建。
+
+```
+  function CreateObj (name, age) {
+    this.name = name
+    this.age = age
+  }
+  CreateObj.prototype.getName = function () { alert(this.name) }
+```
+
+### 动态原型模式
+
+主要是为了解决组合模式看起来不够封装的写法。
+```
+  function CreateObj (name, age) {
+    this.name = name
+    this.age = age
+    if (typeof CreateObj.prototype.getName !== 'function') {
+      CreateObj.prototype.getName = function () { alert(this.name)  }
+    }
+  } 
+```
+
+### 委托构造模式
+
+封装私有方法。
+
+```
+  function CreateObj (name, age) {
+    let obj = {}
+    obj.age = age
+    obj.getName = function () {
+      alert(name)
+    }
+    return obj
+  }
+```
+在这个方法中，只有内部的 getName 方法才能访问到传进来的 name 属性。
+
