@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>十一、你不知道的CSS | Secret</title>
+    <meta name="description" content="Just playing around">
+    <meta name="generator" content="VuePress 1.3.1">
+    
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.aeb91cb6.css" as="style"><link rel="preload" href="/blog/assets/js/app.3471d981.js" as="script"><link rel="preload" href="/blog/assets/js/2.958d3440.js" as="script"><link rel="preload" href="/blog/assets/js/3.2fc6cc71.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.a3996ccd.js"><link rel="prefetch" href="/blog/assets/js/11.93dd931a.js"><link rel="prefetch" href="/blog/assets/js/12.9cf7d78e.js"><link rel="prefetch" href="/blog/assets/js/13.2d587057.js"><link rel="prefetch" href="/blog/assets/js/14.63dd6a68.js"><link rel="prefetch" href="/blog/assets/js/15.c5726d92.js"><link rel="prefetch" href="/blog/assets/js/16.18fa3834.js"><link rel="prefetch" href="/blog/assets/js/17.3fd3f87e.js"><link rel="prefetch" href="/blog/assets/js/18.5747631c.js"><link rel="prefetch" href="/blog/assets/js/19.101e464e.js"><link rel="prefetch" href="/blog/assets/js/20.bc9503b2.js"><link rel="prefetch" href="/blog/assets/js/21.a097970e.js"><link rel="prefetch" href="/blog/assets/js/22.85a648ed.js"><link rel="prefetch" href="/blog/assets/js/23.e1592f9e.js"><link rel="prefetch" href="/blog/assets/js/24.ec644c15.js"><link rel="prefetch" href="/blog/assets/js/25.be539562.js"><link rel="prefetch" href="/blog/assets/js/26.461f3890.js"><link rel="prefetch" href="/blog/assets/js/27.55745cbc.js"><link rel="prefetch" href="/blog/assets/js/28.183052a5.js"><link rel="prefetch" href="/blog/assets/js/29.422a6238.js"><link rel="prefetch" href="/blog/assets/js/30.059a0c23.js"><link rel="prefetch" href="/blog/assets/js/31.dec1d7dd.js"><link rel="prefetch" href="/blog/assets/js/32.67453172.js"><link rel="prefetch" href="/blog/assets/js/33.7a4b8dac.js"><link rel="prefetch" href="/blog/assets/js/34.19c0470d.js"><link rel="prefetch" href="/blog/assets/js/35.58315e07.js"><link rel="prefetch" href="/blog/assets/js/36.a697fa97.js"><link rel="prefetch" href="/blog/assets/js/37.6e8e12be.js"><link rel="prefetch" href="/blog/assets/js/38.7377d990.js"><link rel="prefetch" href="/blog/assets/js/39.734147c1.js"><link rel="prefetch" href="/blog/assets/js/4.15257a4c.js"><link rel="prefetch" href="/blog/assets/js/40.0d24bc3f.js"><link rel="prefetch" href="/blog/assets/js/41.42b602d9.js"><link rel="prefetch" href="/blog/assets/js/42.5d3a167a.js"><link rel="prefetch" href="/blog/assets/js/43.a3fe4337.js"><link rel="prefetch" href="/blog/assets/js/44.d2c37354.js"><link rel="prefetch" href="/blog/assets/js/45.36c5df3a.js"><link rel="prefetch" href="/blog/assets/js/46.bcbd855d.js"><link rel="prefetch" href="/blog/assets/js/5.2d971ee4.js"><link rel="prefetch" href="/blog/assets/js/6.ca7d3fe3.js"><link rel="prefetch" href="/blog/assets/js/7.7debb952.js"><link rel="prefetch" href="/blog/assets/js/8.ac2a43a1.js"><link rel="prefetch" href="/blog/assets/js/9.21b66e85.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.aeb91cb6.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">Secret</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/blog/document/swiper.html" class="nav-link">
+  技术文档
+</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/blog/blog/document/swiper.html" class="nav-link">
+  技术文档
+</a></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>技术文档</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/blog/document/swiper.html" class="sidebar-link">一、swiper插件的坑，你了解多少</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#引入和基本用法" class="sidebar-link">引入和基本用法</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#配置选项" class="sidebar-link">配置选项</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#swiper实例" class="sidebar-link">swiper实例</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#样式调整" class="sidebar-link">样式调整</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#sidespreview相关" class="sidebar-link">sidesPreview相关</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#边距相关" class="sidebar-link">边距相关</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#loop相关" class="sidebar-link">Loop相关</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/swiper.html#异步加载" class="sidebar-link">异步加载</a></li></ul></li><li><a href="/blog/blog/document/infiniate.html" class="sidebar-link">二、你真的了解无限加载组件吗？</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/infiniate.html#总结" class="sidebar-link">总结</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/infiniate.html#vue-scroller" class="sidebar-link">vue-scroller</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/infiniate.html#vue-infinite-loading" class="sidebar-link">vue-infinite-loading</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/infiniate.html#vue-infinite-scroll" class="sidebar-link">vue-infinite-scroll</a></li></ul></li><li><a href="/blog/blog/document/YUIDoc.html" class="sidebar-link">三、YUIDoc不完全指北</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/YUIDoc.html#安装" class="sidebar-link">安装</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/YUIDoc.html#语法" class="sidebar-link">语法</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/YUIDoc.html#文档生成" class="sidebar-link">文档生成</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/YUIDoc.html#进展" class="sidebar-link">进展</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/YUIDoc.html#收获与总结" class="sidebar-link">收获与总结</a></li></ul></li><li><a href="/blog/blog/document/mini.html" class="sidebar-link">四、初识微信小程序</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/mini.html#页面调试（自定义编译配置）" class="sidebar-link">页面调试（自定义编译配置）</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/mini.html#微信小程序生命周期" class="sidebar-link">微信小程序生命周期</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/mini.html#模板消息（消息推送）" class="sidebar-link">模板消息（消息推送）</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/mini.html#自定义组件" class="sidebar-link">自定义组件</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/mini.html#小程序跳转类" class="sidebar-link">小程序跳转类</a></li></ul></li><li><a href="/blog/blog/document/fenxi.html" class="sidebar-link">五、JS循环语句中的性能分析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/fenxi.html#描述" class="sidebar-link">描述</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fenxi.html#种类" class="sidebar-link">种类</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fenxi.html#结论" class="sidebar-link">结论</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fenxi.html#附录" class="sidebar-link">附录</a></li></ul></li><li><a href="/blog/blog/document/this.html" class="sidebar-link">六、关于this</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/this.html#总结" class="sidebar-link">总结</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/this.html#this的四种绑定方式" class="sidebar-link">this的四种绑定方式</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/this.html#优先级" class="sidebar-link">优先级</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/this.html#例子" class="sidebar-link">例子</a></li></ul></li><li><a href="/blog/blog/document/grid.html" class="sidebar-link">七、CSS grid</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/grid.html#容器属性" class="sidebar-link">容器属性</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/grid.html#项目属性" class="sidebar-link">项目属性</a></li></ul></li><li><a href="/blog/blog/document/fetch.html" class="sidebar-link">八、fetch Api</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/fetch.html#与-xmlhttprequest-的异同" class="sidebar-link">与 XMLHttpRequest 的异同</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fetch.html#response-对象" class="sidebar-link">Response 对象</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fetch.html#request-对象" class="sidebar-link">Request 对象</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/fetch.html#headers-对象" class="sidebar-link">Headers 对象</a></li></ul></li><li><a href="/blog/blog/document/debounce.html" class="sidebar-link">九、深入理解防抖和节流</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/debounce.html#防抖-（debounce）" class="sidebar-link">防抖 （debounce）</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/debounce.html#节流-（throttle）" class="sidebar-link">节流 （throttle）</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/debounce.html#应用场景" class="sidebar-link">应用场景</a></li></ul></li><li><a href="/blog/blog/document/application.html" class="sidebar-link">十、代码之如何实现？</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/application.html#_1、如何实现数组的扁平化？" class="sidebar-link">1、如何实现数组的扁平化？</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/application.html#_2、如何实现数组的随机排序？" class="sidebar-link">2、如何实现数组的随机排序？</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/application.html#_3、js-如何创建一个对象？" class="sidebar-link">3、JS 如何创建一个对象？</a></li></ul></li><li><a href="/blog/blog/document/css.html" class="active sidebar-link">十一、你不知道的CSS</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/document/css.html#_1、position-属性值及其用法" class="sidebar-link">1、position 属性值及其用法</a></li><li class="sidebar-sub-header"><a href="/blog/blog/document/css.html#_2、css-盒模型" class="sidebar-link">2、CSS 盒模型</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>深入axios</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Express</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Node.js</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>算法</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>跨域</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>学习轨迹</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>散文随笔</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="十一、你不知道的css"><a href="#十一、你不知道的css" class="header-anchor">#</a> 十一、你不知道的CSS</h1> <h2 id="_1、position-属性值及其用法"><a href="#_1、position-属性值及其用法" class="header-anchor">#</a> 1、position 属性值及其用法</h2> <h3 id="static"><a href="#static" class="header-anchor">#</a> static</h3> <p>position 的默认值，不设定任何定位方式即为该值。此时 top、left、z-index 等各种定位属性不起作用。</p> <h3 id="relative"><a href="#relative" class="header-anchor">#</a> relative</h3> <p>相对定位，设置该值的元素不会脱离文档流，相对于元素本来的位置进行定位。该值对 table-* 一类的元素没有作用。<b>脱离文档流的意思是该元素偏离了位置之后别的元素会占据它原来的空间。</b></p> <p>HTML</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  &lt;div class=&quot;box&quot; id=&quot;one&quot;&gt;One&lt;/div&gt;
+  &lt;div class=&quot;box&quot; id=&quot;two&quot;&gt;Two&lt;/div&gt;
+  &lt;div class=&quot;box&quot; id=&quot;three&quot;&gt;Three&lt;/div&gt;
+  &lt;div class=&quot;box&quot; id=&quot;four&quot;&gt;Four&lt;/div&gt;
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>CSS</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  .box { 
+    display: inline-block; 
+    background: red; 
+    width: 100px; 
+    height: 100px; 
+    margin: 20px; 
+    color: white; 
+  }
+
+  #three { 
+    position: relative; 
+    top: 10px; 
+    left: 50px; 
+    z-index: -50;
+    width: 100px;
+    height: 100px;
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p><img src="/blog/assets/img/1.33db0434.png" alt="solar"></p> <p>position的值为 relative 的元素不会脱离文档流，后继元素也不会占据它的位置。</p> <h3 id="absolute"><a href="#absolute" class="header-anchor">#</a> absolute</h3> <p>相对于最近一级的且 position 的值不是 static 的祖先元素进行定位。且设置该值的元素会脱离文档流，如果不存在这这样的祖先元素，那么就相对于 <b>body</b> 元素进行定位。</p> <p>HTML</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  div class=&quot;con&quot;&gt;
+    &lt;div class=&quot;box&quot; id=&quot;one&quot;&gt;One&lt;/div&gt;
+    &lt;div class=&quot;box&quot; id=&quot;two&quot;&gt;Two&lt;/div&gt;
+    &lt;div class=&quot;box&quot; id=&quot;three&quot;&gt;Three&lt;/div&gt;
+    &lt;div class=&quot;box&quot; id=&quot;four&quot;&gt;Four&lt;/div&gt;
+  &lt;/div&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>CSS</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  .con {
+    margin-left: 80px;
+    position: relative;
+  }
+  .box { 
+    display: inline-block; 
+    background: grey; 
+    width: 100px; 
+    height: 100px; 
+    margin: 20px; 
+    color: white; 
+  }
+  #three { 
+    position: absolute; 
+    top: 100px; 
+    left: -100px; 
+    z-index: -50;
+    width: 100px;
+    height: 100px;
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><p><img src="/blog/assets/img/2.b35ecc98.png" alt="solar"></p> <p>position 为 absolute 的元素会脱离文档流，其他元素会挤占它的位置。且相对于不是 static 的祖先元素定位。</p> <h3 id="fixed"><a href="#fixed" class="header-anchor">#</a> fixed</h3> <p>相对于视口进行定位，元素会被移除正常的文档流, 并且随着视口的滚动元素位置也不会发生变化。相对于浏览器窗口定位是不准确的，因为当祖先元素的 transform，perspective 或者 filter 属性非 none 的时候，视口改为祖先。</p> <h4 id="相对于屏幕视口定位"><a href="#相对于屏幕视口定位" class="header-anchor">#</a> 相对于屏幕视口定位</h4> <p>HTML</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  &lt;div class=&quot;con&quot;&gt;
+    &lt;div class=&quot;box&quot; id=&quot;one&quot;&gt;One&lt;/div&gt;
+    &lt;div class=&quot;box&quot; id=&quot;two&quot;&gt;Two&lt;/div&gt;
+    &lt;div class=&quot;box&quot; id=&quot;three&quot;&gt;Three&lt;/div&gt;
+    &lt;div class=&quot;box&quot; id=&quot;four&quot;&gt;Four&lt;/div&gt;
+  &lt;/div&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>CSS</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  .con {
+    margin-left: 80px;
+    position: relative;
+  }
+  .box { 
+    display: inline-block; 
+    background: grey; 
+    width: 100px; 
+    height: 100px; 
+    margin: 20px; 
+    color: white; 
+  }
+  #three { 
+    position: fixed; 
+    bottom: 100px; 
+    left: 100px; 
+    z-index: -50;
+    width: 100px;
+    height: 100px;
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><p><img src="/blog/assets/img/3.8f8755c2.png" alt="solar"></p> <p>随着视口的放大和缩小，红圈圈出来的地方大小是不变的。</p> <h4 id="相对于父级元素定位"><a href="#相对于父级元素定位" class="header-anchor">#</a> 相对于父级元素定位</h4> <p>HTML</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  &lt;div class=&quot;con&quot;&gt;
+    &lt;div class=&quot;box&quot; id=&quot;one&quot;&gt;One&lt;/div&gt;
+    &lt;div class=&quot;box&quot; id=&quot;two&quot;&gt;Two&lt;/div&gt;
+    &lt;div class=&quot;box&quot; id=&quot;three&quot;&gt;Three&lt;/div&gt;
+    &lt;div class=&quot;box&quot; id=&quot;four&quot;&gt;Four&lt;/div&gt;
+  &lt;/div&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>CSS</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  .con {
+    margin-left: 80px;
+    position: relative;
+    transform: scale(1);
+    border: 1px solid red;
+  }
+  .box { 
+    display: inline-block; 
+    background: grey; 
+    width: 100px; 
+    height: 100px; 
+    margin: 20px; 
+    color: white; 
+  }
+
+  #three { 
+    position: fixed; 
+    bottom: 100px; 
+    left: 100px; 
+    z-index: -50;
+    width: 100px;
+    height: 100px;
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p><img src="/blog/assets/img/4.8e9d1120.png" alt="solar"></p> <p>由于父级元素 transform 属性不为 none，所以 .three 元素相对于父级元素 fixed 定位。图示中黄色区域大小不会发生改变。</p> <h3 id="sticky"><a href="#sticky" class="header-anchor">#</a> sticky</h3> <p>粘性定位，相对于最近一级的滚动祖先和块级元素进行定位。它会定义一个阈值，在该阈值之内表现为 releative 定位，在这置位之外为固定定位 fixed。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  #one { position: sticky; top: 10px; }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>在 viewport 视口滚动到元素 top 距离小于 10px 之前，元素为相对定位。之后，元素将固定在与顶部距离 10px 的位置，直到 viewport 视口回滚到阈值以下。当其父元素不在视窗内时item元素失去粘性效果。这一点与fixed的表现不同。fixed定位元素是相对于整个视窗定位。</p> <h2 id="_2、css-盒模型"><a href="#_2、css-盒模型" class="header-anchor">#</a> 2、CSS 盒模型</h2> <p>有两种盒模型，W3C 标准盒模型 content-box， IE 盒模型 border-box。</p> <p>浏览器默认的是 content-box 标准盒模型。</p> <p>盒模型包分为内容（content）、填充（padding）、边界（margin）、边框（border）四个部分。</p> <p>W3C 标准盒模型： 元素设置的 width、height 即为 content 的宽高，不包含 border 和 padding。</p> <p>IE 盒模型：元素的 width、height 包含 content、padding 和 border。</p> <p>盒模型可以通过 CSS 的 box-sizing 属性设置。</p> <p>HTML（默认 W3C 标准盒模型）:</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  &lt;div class=&quot;con&quot;&gt;&lt;/div&gt;
+  .con {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    padding: 20px;
+    border: 40px solid brown;
+    margin: 30px;
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p><img src="/blog/assets/img/5.388f222e.png" alt="solar"></p> <p>标准盒模型 content 的宽高即为设置的 width（200），height(200)</p> <p>HTML（IE盒模型）:</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  &lt;div class=&quot;con&quot;&gt;&lt;/div&gt;
+  .con {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    padding: 20px;
+    border: 40px solid brown;
+    margin: 30px;
+    box-sizing: border-box;
+  }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p><img src="/blog/assets/img/6.fe4aeffe.png" alt="solar"></p> <p>手动设置盒模型为 border-box。元素的宽高即为 content(80) + border(40 * 2) + padding(20 * 2) = width (200)</p> <p>content的宽高会根据设置的 width 、border、padding 动态设置。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/blog/document/application.html" class="prev">
+        十、代码之如何实现？
+      </a></span> <span class="next"><a href="/blog/blog/axios/tools.html">
+        一、工具类
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/blog/assets/js/app.3471d981.js" defer></script><script src="/blog/assets/js/2.958d3440.js" defer></script><script src="/blog/assets/js/3.2fc6cc71.js" defer></script>
+  </body>
+</html>
