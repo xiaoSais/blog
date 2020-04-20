@@ -228,3 +228,255 @@ HTML（IE盒模型）:
 手动设置盒模型为 border-box。元素的宽高即为 content(80) + border(40 * 2) + padding(20 * 2) = width (200)
 
 content的宽高会根据设置的 width 、border、padding 动态设置。
+
+## 3、伪元素和伪类
+
+伪元素和伪类是为了修饰在文档树中不存在的部分。
+
+伪类用于当已有元素处于某个状态时，为其添加对应的样式，这个状态根据用户行为而动态变化。是为了修饰文档树中已有元素。
+
+伪元素用于创建 DOM 树中不存在的元素，并为其添加样式。
+
+### 常见伪类
+
+* 状态类
+    * :link
+    * :visited
+    * :hover
+    * :active
+    * focus
+
+* 表单相关
+    * :checked
+    * :disabled
+    * :required
+* 结构化
+    * :not
+    * :first-child
+    * :last-child
+    * :nth-of-type
+
+### 常见伪元素
+
+#### ::before && ::after
+
+在元素之前 && 之后创建 DOM 树中并不存在的元素
+
+HTML:
+```
+  <span class="con">ddd</span>
+```
+CSS
+
+```
+  .con::before {
+      content: '一个人';
+      display: block;
+      color: red;
+    }
+  .con::after {
+    content:'\260F';
+    font-size: 16px;
+  }
+```
+
+
+效果：
+
+![solar](./imgs/7.png)
+
+创建的元素无法审查，调试比较麻烦，但是可以减少 HTML 代码，优化结构。
+
+tips: 创建的伪元素默认是 display: inline, 可以通过设置其 display 属性来覆盖它。
+
+#### content 值
+
+1、string（看上个例子）
+
+2、attr 可以获取元素的属性值
+
+HTML:
+```
+  <span class="con">ddd</span>
+```
+CSS:
+
+```
+  .con::before {
+    content: ""attr(class)"";
+    display: block;
+    color: red;
+  }
+```
+页面会展示 con 注意 attr 要加双引号，表示是动态需要计算的值。同时最外边也要加双引号。
+
+3、空值 "" 一般用于清除浮动。
+
+4、url 可以引用媒体文件（比如图片）
+
+HTML:
+```
+  <span class="con">ddd</span>
+```
+CSS:
+
+```
+  .con::before {
+    content: url("https://www.google.com/logos/doodles/2018/world-cup-2018-day-19-6211393811382272.3-law.gif");
+    display: block;
+    color: red;
+  }
+```
+
+效果：
+
+![solar](./imgs/8.jpeg)
+
+#### ::first-letter/:first-letter ||  ::first-line/:first-line
+
+匹配首字母 || 首行，该元素不在 DOM 树中。
+
+HTML
+```
+  <div class="con">
+    列表符号后面有两列编号,第一列编号用于HTML文档中,需要在编号前面加上“第二列编号用于CSS文档中,需要在编号前面加上反斜杠“”进行转义,比如说“向左箭头”符号对应的CSS编号是:“21E0”,那么在文档
+  </div>
+```
+
+CSS
+```
+  .con {
+    width: 200px;
+  }
+  .con::first-letter {
+    font-size: 2em;
+    color: saddlebrown;
+  }
+  .con::first-line {
+    color: green;
+  }
+```
+效果：
+
+![solar](./imgs/9.png)
+
+#### ::selection
+
+用于匹配被用户选中或者处于高亮状态的部分。::selection只可以应用于少数的CSS属性：color, background, cursor,和outline。
+
+HTML:
+```
+  <div class="con">列表符号后面有两列编号</div>
+```
+CSS:
+```
+  .con {
+    width: 200px;
+    font-size: 10px;
+  }
+  .con::selection {
+    font-size: 20px;
+    background: hotpink;
+  }
+```
+![solar](./imgs/10.png)
+
+font-size 并不起作用，只有 background 起作用。
+
+#### ::placeholder
+
+::placeholder 匹配占位符的文本，只有元素设置了 placeholder 属性时，该伪元素才能生效。
+
+HTML:
+```
+  <input type="email" placeholder="name@domain.com">
+```
+
+CSS:
+```
+  input::-moz-placeholder {
+    color: red;
+  }
+  
+  input::-webkit-input-placeholder {
+    color: red;
+  }
+  
+  /* IE 10 only */
+  input:-ms-input-placeholder {
+    color: red;
+  }
+  
+  /* Firefox 18 and below */
+  input:-moz-input-placeholder {
+    color: red;
+  }
+```
+
+效果：
+
+![solar](./imgs/11.png)
+
+## 4、居中布局
+
+
+1、利用 position 以及负边距实现。以下例子最外层是 body 标签。
+
+利用相对定位，移动元素左上角到父元素中心，然后利用设置负边距移动到父元素的中心。
+
+```
+  .box {
+    width: 800px;
+    height: 300px;
+    position: relative;
+    background-color: brown;
+    left: 50%;
+    top: 50%;
+    margin: -150px  0 0 -400px;
+  }
+```
+
+2、思路类似，不过移动到元素中心的时候采用 transform: translate(-50%, -50%),这种方式有一个好处就是无需知道子元素的宽高。
+
+```
+  .box {
+    position: relative;
+    background-color: brown;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+```
+
+3、利用 flex 布局，只需要设置父级元素的样式。
+
+```
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+```
+
+4、利用 text-align 和 vertial-align 实现水平垂直居中。
+```
+  body {
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+  body::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+  .box {
+    display: inline-block;
+    width: 500px;
+    height: 400px;
+    background-color: pink;
+    white-space: normal;
+    vertical-align: middle;
+  }
+
+```
