@@ -480,3 +480,200 @@ CSS:
   }
 
 ```
+
+## 5、用 CSS 实现一个三角形
+
+HTML:
+
+```
+  <body>
+    <div class="header"></div>
+    <div class="main">
+      <div class="left"></div>
+      <div class="right"></div>
+    </div>
+  </body>
+```
+
+使用 border 实现
+
+```
+  .con {
+    width: 0;
+    height: 0;
+    border-width: 20px;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+  }
+```
+
+## 5、一个满屏品字布局如何设计
+
+利用 float 实现。
+
+```
+  * {
+    margin: 0;
+  }
+  body {
+    width: 100%;
+    height: 100%;
+  }
+  .header {
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+    background: greenyellow;
+  }
+  .left,.right {
+    float: left;
+    background: red;
+    width: 50%;
+    height: 50%;
+  }
+  .right {
+    background-color: rosybrown;
+  }
+```
+
+利用 inile-block 实现
+
+```
+   * {
+      margin: 0;
+    }
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .header {
+      width: 50%;
+      height: 50%;
+      margin: 0 auto;
+      background: greenyellow;
+    }
+    .main {
+      text-align: center;
+    }
+    .left,.right {
+      display: inline-block;
+      background: red;
+      width: 49%;
+      height: 50%;
+    }
+    .right {
+      background-color: rosybrown;
+    }
+```
+利用绝对定位实现
+```
+   * {
+      margin: 0;
+    }
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .header {
+      width: 50%;
+      height: 50%;
+      margin: 0 auto;
+      background: greenyellow;
+    }
+    .main {
+      position: relative;
+      width: 100%;
+      height: 50%;
+    }
+    .left,.right {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+    }
+    .left {
+      left: 0;
+      background-color: royalblue;
+    }
+    .right {
+      right: 0;
+      background-color: rosybrown;
+    }
+```
+
+利用 flex 布局实现
+
+```
+    * {
+        margin: 0;
+      }
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .header {
+      width: 50%;
+      height: 50%;
+      margin: 0 auto;
+      background: greenyellow;
+    }
+    .main {
+      display: flex;
+      height: 50%;
+    }
+    .left,.right {
+      width: 50%;
+      height: 100%;
+    }
+    .left {
+      left: 0;
+      background-color: royalblue;
+    }
+    .right {
+      right: 0;
+      background-color: rosybrown;
+    }
+```
+
+## 5、多列等高布局如何实现
+
+利用 margin-bottom 和 padding-bottom 对冲实现
+HTML；
+
+```
+  <div class="main">
+    <div class="child"></div>
+    <div class="child"></div>
+    <div class="child"></div>
+  </div>
+```
+
+```
+  .main {
+    overflow: hidden;
+  }
+  .child {
+    float: left;
+    margin: 0 10px -9999px 0;
+    padding-bottom: 9999px;
+    width: 200px;
+  }
+```
+
+利用 table-cell 实现
+
+```
+  .child {
+    width: 300px;
+    display: table-cell;
+    padding: 10px;
+    background-color: sandybrown;
+  }
+```
+
+利用 flex 实现
+
+```
+  .main {
+    display: flex;
+  }
+```
