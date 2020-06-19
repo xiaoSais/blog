@@ -11,7 +11,7 @@ position 的默认值，不设定任何定位方式即为该值。此时 top、l
 相对定位，设置该值的元素不会脱离文档流，相对于元素本来的位置进行定位。该值对 table-* 一类的元素没有作用。<b>脱离文档流的意思是该元素偏离了位置之后别的元素会占据它原来的空间。</b>
 
 HTML 
-```
+```html
   <div class="box" id="one">One</div>
   <div class="box" id="two">Two</div>
   <div class="box" id="three">Three</div>
@@ -19,7 +19,7 @@ HTML
 
 ```
 CSS
-```
+```css
   .box { 
     display: inline-block; 
     background: red; 
@@ -49,8 +49,8 @@ position的值为 relative 的元素不会脱离文档流，后继元素也不�
 
 HTML
 
-```
-  div class="con">
+```html
+  <div class="con">
     <div class="box" id="one">One</div>
     <div class="box" id="two">Two</div>
     <div class="box" id="three">Three</div>
@@ -59,7 +59,7 @@ HTML
 ```
 CSS
 
-```
+```css
   .con {
     margin-left: 80px;
     position: relative;
@@ -92,7 +92,7 @@ position 为 absolute 的元素会脱离文档流，其他元素会挤占它的�
 #### 相对于屏幕视口定位
 
 HTML
-```
+```html
   <div class="con">
     <div class="box" id="one">One</div>
     <div class="box" id="two">Two</div>
@@ -102,7 +102,7 @@ HTML
 ```
 
 CSS
-```
+```css
   .con {
     margin-left: 80px;
     position: relative;
@@ -132,7 +132,7 @@ CSS
 #### 相对于父级元素定位
 
 HTML
-```
+```html
   <div class="con">
     <div class="box" id="one">One</div>
     <div class="box" id="two">Two</div>
@@ -142,7 +142,7 @@ HTML
 ```
 
 CSS
-```
+```css
   .con {
     margin-left: 80px;
     position: relative;
@@ -195,7 +195,7 @@ IE 盒模型：元素的 width、height 包含 content、padding 和 border。
 盒模型可以通过 CSS 的 box-sizing 属性设置。
 
 HTML（默认 W3C 标准盒模型）:
-```
+```css
   <div class="con"></div>
   .con {
     width: 200px;
@@ -211,7 +211,7 @@ HTML（默认 W3C 标准盒模型）:
 标准盒模型 content 的宽高即为设置的 width（200），height(200)
 
 HTML（IE盒模型）:
-```
+```css
   <div class="con"></div>
   .con {
     width: 200px;
@@ -263,12 +263,12 @@ content的宽高会根据设置的 width 、border、padding 动态设置。
 在元素之前 && 之后创建 DOM 树中并不存在的元素
 
 HTML:
-```
+```html
   <span class="con">ddd</span>
 ```
 CSS
 
-```
+```css
   .con::before {
       content: '一个人';
       display: block;
@@ -296,12 +296,12 @@ tips: 创建的伪元素默认是 display: inline, 可以通过设置其 display
 2、attr 可以获取元素的属性值
 
 HTML:
-```
+```html
   <span class="con">ddd</span>
 ```
 CSS:
 
-```
+```css
   .con::before {
     content: ""attr(class)"";
     display: block;
@@ -315,12 +315,12 @@ CSS:
 4、url 可以引用媒体文件（比如图片）
 
 HTML:
-```
+```html
   <span class="con">ddd</span>
 ```
 CSS:
 
-```
+```css
   .con::before {
     content: url("https://www.google.com/logos/doodles/2018/world-cup-2018-day-19-6211393811382272.3-law.gif");
     display: block;
@@ -337,14 +337,14 @@ CSS:
 匹配首字母 || 首行，该元素不在 DOM 树中。
 
 HTML
-```
+```html
   <div class="con">
     列表符号后面有两列编号,第一列编号用于HTML文档中,需要在编号前面加上“第二列编号用于CSS文档中,需要在编号前面加上反斜杠“”进行转义,比如说“向左箭头”符号对应的CSS编号是:“21E0”,那么在文档
   </div>
 ```
 
 CSS
-```
+```css
   .con {
     width: 200px;
   }
@@ -365,11 +365,11 @@ CSS
 用于匹配被用户选中或者处于高亮状态的部分。::selection只可以应用于少数的CSS属性：color, background, cursor,和outline。
 
 HTML:
-```
+```html
   <div class="con">列表符号后面有两列编号</div>
 ```
 CSS:
-```
+```css
   .con {
     width: 200px;
     font-size: 10px;
@@ -388,12 +388,12 @@ font-size 并不起作用，只有 background 起作用。
 ::placeholder 匹配占位符的文本，只有元素设置了 placeholder 属性时，该伪元素才能生效。
 
 HTML:
-```
+```html
   <input type="email" placeholder="name@domain.com">
 ```
 
 CSS:
-```
+```css
   input::-moz-placeholder {
     color: red;
   }
@@ -424,7 +424,7 @@ CSS:
 
 利用相对定位，移动元素左上角到父元素中心，然后利用设置负边距移动到父元素的中心。
 
-```
+```css
   .box {
     width: 800px;
     height: 300px;
@@ -438,7 +438,7 @@ CSS:
 
 2、思路类似，不过移动到元素中心的时候采用 transform: translate(-50%, -50%),这种方式有一个好处就是无需知道子元素的宽高。
 
-```
+```css
   .box {
     position: relative;
     background-color: brown;
@@ -450,7 +450,7 @@ CSS:
 
 3、利用 flex 布局，只需要设置父级元素的样式。
 
-```
+```css
   body {
     display: flex;
     align-items: center;
@@ -459,7 +459,7 @@ CSS:
 ```
 
 4、利用 text-align 和 vertial-align 实现水平垂直居中。
-```
+```css
   body {
     background: rgba(0, 0, 0, 0.5);
     text-align: center;
@@ -485,7 +485,7 @@ CSS:
 
 HTML:
 
-```
+```html
   <body>
     <div class="header"></div>
     <div class="main">
@@ -497,7 +497,7 @@ HTML:
 
 使用 border 实现
 
-```
+```css
   .con {
     width: 0;
     height: 0;
@@ -511,7 +511,7 @@ HTML:
 
 利用 float 实现。
 
-```
+```css
   * {
     margin: 0;
   }
@@ -538,7 +538,7 @@ HTML:
 
 利用 inile-block 实现
 
-```
+```css
    * {
       margin: 0;
     }
@@ -566,7 +566,7 @@ HTML:
     }
 ```
 利用绝对定位实现
-```
+```css
    * {
       margin: 0;
     }
@@ -602,7 +602,7 @@ HTML:
 
 利用 flex 布局实现
 
-```
+```scss
     * {
         margin: 0;
       }
@@ -639,7 +639,7 @@ HTML:
 利用 margin-bottom 和 padding-bottom 对冲实现
 HTML；
 
-```
+```html
   <div class="main">
     <div class="child"></div>
     <div class="child"></div>
@@ -647,7 +647,7 @@ HTML；
   </div>
 ```
 
-```
+```css
   .main {
     overflow: hidden;
   }
@@ -661,7 +661,7 @@ HTML；
 
 利用 table-cell 实现
 
-```
+```css
   .child {
     width: 300px;
     display: table-cell;
@@ -672,7 +672,7 @@ HTML；
 
 利用 flex 实现
 
-```
+```css
   .main {
     display: flex;
   }

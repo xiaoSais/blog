@@ -16,7 +16,7 @@ Node.js 中使用 process 指代当前进程
 
 Node.js 处理CPU密集型的操作会造成进程堵塞
 
-```
+```js
   const longComputation = () => {
     let sum = 0;
     for (let i = 0; i < 1e10; i++) {
@@ -43,7 +43,7 @@ Node.js 处理CPU密集型的操作会造成进程堵塞
 Node.js 使用 child_process 开启多进程。
 
 ./index.js
-```
+```js
   const http = require('http');
   const fork = require('child_process').fork;
   const server = http.createServer();
@@ -63,7 +63,7 @@ Node.js 使用 child_process 开启多进程。
 ```
 ./fork_compute.js
 
-```
+```js
   const longComputation = () => {
     let sum = 0;
     for (let i = 0; i < 1e10; i++) {
@@ -86,7 +86,7 @@ Node.js 可以通过 child_process.fork() 去创建子进程，子进程拥有�
 
 ## cluster模块
 
-```
+```js
   const longComputation = () => {
     let sum = 0;
     for (let i = 0; i < 1e10; i++) {

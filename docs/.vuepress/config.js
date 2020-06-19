@@ -56,13 +56,14 @@ module.exports = {
         children: [
           '/blog/Node/process',
           '/blog/Node/memory',
-          '/blog/Node/sync'
+          '/blog/Node/sync',
+          '/blog/Node/stream'
         ]
       },
       {
-        title: '算法',
+        title: 'Vue生态',
         children: [
-          '/blog/algo/dynamic'
+          '/blog/vue/vue'
         ]
       },
       {

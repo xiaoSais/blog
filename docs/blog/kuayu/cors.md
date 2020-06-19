@@ -30,7 +30,7 @@
 
 eg: Client.js （客户端端口在3001）
 
-```
+```js
   var xhr = new XMLHttpRequest()
   xhr.open('get','http://localhost:3000/login',true)
   xhr.setRequestHeader('Content-Type', 'text/plain');
@@ -44,7 +44,7 @@ eg: Client.js （客户端端口在3001）
 客户端发起了一个 get 请求，并甚至请求头 Content-Type 字段为 text/plain，属于简单请求。
 
 Server.js (端口在3000)
-```
+```js
   app.get('/login', (req,res) => {
   res.set('Access-Control-Allow-Origin','*')
   // res.set('Access-Control-Allow-Origin','http://localhost:3001')
@@ -81,7 +81,7 @@ Accept-Language: zh-CN,zh;q=0.9
 
 eg: Client.js
 
-```
+```js
   var xhr = new XMLHttpRequest()
   xhr.open('put','http://localhost:3000/login',true)
   xhr.setRequestHeader('test', 'text/plain');
@@ -101,7 +101,7 @@ Server.js
 
 同时 put 方法也要设置 Access-Control-Allow-Origin 的响应头。
 
-```
+```js
   app.options('/login',function(req,res){
     res.set('Access-Control-Allow-Origin','*')  //必须设置
     res.set('Access-Control-Allow-Methods','PUT') //必须设置
@@ -128,7 +128,7 @@ Access-Control-Request-Headers: X-PINGOTHER, Content-Type
 
 首部字段 Access-Control-Request-Method 告知服务器，实际请求将使用 POST 方法。首部字段 Access-Control-Request-Headers 告知服务器，实际请求将携带两个自定义请求首部字段：X-PINGOTHER 与 Content-Type。服务器据此决定，该实际请求是否被允许。
 
-put 请求的相应头
+put 请求的响应头
 ```
 HTTP/1.1 200 OK
 X-Powered-By: Express 
@@ -149,7 +149,7 @@ Connection: keep-alive
 ## 带 cookie 的预检请求
 
 eg: Client.js
-```
+```js
   var xhr = new XMLHttpRequest()
   xhr.open('put','http://localhost:3000/login',true)
   xhr.setRequestHeader('test', 'text/plain');
@@ -166,7 +166,7 @@ eg: Client.js
 
 Server.js
 
-```
+```js
   app.options('/login',function(req,res){
     res.set('Access-Control-Allow-Origin','http://localhost:3001')  //必须设置
     res.set('Access-Control-Allow-Methods','PUT') //必须设置
